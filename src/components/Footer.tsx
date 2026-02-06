@@ -14,9 +14,9 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="relative border-t border-cyber-cyan/20 bg-cyber-bg-light">
+    <footer className="relative border-t border-cyber-yellow/20 bg-cyber-bg-light">
       {/* Decorative top line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyber-cyan to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyber-yellow to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -24,7 +24,7 @@ export default function Footer() {
           <div className="space-y-4">
             <motion.a
               href="#"
-              className="flex items-center gap-2 text-cyber-cyan font-display font-bold text-xl"
+              className="flex items-center gap-2 text-cyber-yellow font-display font-bold text-xl"
               whileHover={{ scale: 1.05 }}
             >
               <Zap className="w-6 h-6" />
@@ -37,7 +37,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-cyber-cyan font-mono text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-4">
               Quick Links
             </h3>
             <nav className="space-y-2">
@@ -45,10 +45,10 @@ export default function Footer() {
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  className="block text-gray-400 hover:text-cyber-cyan transition-colors text-sm"
+                  className="block text-gray-400 hover:text-cyber-yellow transition-colors text-sm"
                   whileHover={{ x: 5 }}
                 >
-                  <span className="text-cyber-cyan/50 mr-2">&gt;</span>
+                  <span className="text-cyber-yellow/50 mr-2">&gt;</span>
                   {link.name}
                 </motion.a>
               ))}
@@ -57,7 +57,7 @@ export default function Footer() {
 
           {/* Contact & Social */}
           <div>
-            <h3 className="text-cyber-cyan font-mono text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-4">
               Connect
             </h3>
             <div className="flex gap-4 mb-4">
@@ -67,8 +67,8 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center border border-cyber-cyan/30 text-cyber-cyan hover:bg-cyber-cyan/10 transition-colors"
-                  whileHover={{ scale: 1.1, borderColor: 'var(--cyber-cyan)' }}
+                  className="w-10 h-10 flex items-center justify-center border border-cyber-yellow/30 text-cyber-yellow hover:bg-cyber-yellow/10 transition-colors"
+                  whileHover={{ scale: 1.1, borderColor: 'var(--cyber-yellow)' }}
                   whileTap={{ scale: 0.9 }}
                   aria-label={social.label}
                 >
@@ -86,18 +86,18 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-cyber-cyan/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-12 pt-8 border-t border-cyber-yellow/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm">
             &copy; {currentYear} {siteConfig.name}. All rights reserved.
           </p>
           <p className="text-gray-500 text-sm flex items-center gap-1">
-            Built with <Heart className="w-4 h-4 text-cyber-magenta" /> and lots of solder
+            Built with <Heart className="w-4 h-4 text-cyber-orange" /> and lots of solder
           </p>
         </div>
       </div>
 
       {/* Circuit decoration */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-cyber-cyan via-cyber-magenta to-cyber-cyan opacity-30" />
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-cyber-yellow via-cyber-orange to-cyber-yellow opacity-30" />
     </footer>
   )
 }

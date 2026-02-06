@@ -22,7 +22,7 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-cyber-bg/90 backdrop-blur-md border-b border-cyber-cyan/20' : 'bg-transparent'
+        scrolled ? 'bg-cyber-bg/90 backdrop-blur-md border-b border-cyber-yellow/20' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,7 +30,7 @@ export default function Navbar() {
           {/* Logo */}
           <motion.a
             href="#"
-            className="flex items-center gap-2 text-cyber-cyan font-display font-bold text-xl"
+            className="flex items-center gap-2 text-cyber-yellow font-display font-bold text-xl"
             whileHover={{ scale: 1.05 }}
           >
             <Zap className="w-6 h-6" />
@@ -43,7 +43,7 @@ export default function Navbar() {
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="text-gray-300 hover:text-cyber-cyan transition-colors font-mono text-sm uppercase tracking-wider animated-underline"
+                className="text-gray-300 hover:text-cyber-yellow transition-colors font-mono text-sm uppercase tracking-wider animated-underline"
                 whileHover={{ y: -2 }}
               >
                 {link.name}
@@ -61,7 +61,7 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden text-cyber-cyan p-2"
+            className="md:hidden text-cyber-yellow p-2"
             onClick={() => setIsOpen(!isOpen)}
             whileTap={{ scale: 0.9 }}
           >
@@ -77,7 +77,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-cyber-bg/95 backdrop-blur-md border-b border-cyber-cyan/20"
+            className="md:hidden bg-cyber-bg/95 backdrop-blur-md border-b border-cyber-yellow/20"
           >
             <div className="px-4 py-4 space-y-3">
               {navLinks.map((link, index) => (
@@ -88,9 +88,9 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                   onClick={() => setIsOpen(false)}
-                  className="block text-gray-300 hover:text-cyber-cyan transition-colors font-mono text-sm uppercase tracking-wider py-2"
+                  className="block text-gray-300 hover:text-cyber-yellow transition-colors font-mono text-sm uppercase tracking-wider py-2"
                 >
-                  <span className="text-cyber-cyan mr-2">//</span>
+                  <span className="text-cyber-yellow mr-2">//</span>
                   {link.name}
                 </motion.a>
               ))}

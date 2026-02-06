@@ -10,17 +10,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Cyberpunk color palette
+        // Cyberpunk Yellow/Black color palette
         cyber: {
-          bg: '#0a0a0f',
-          'bg-light': '#12121a',
+          bg: '#0a0a0a',
+          'bg-light': '#111111',
+          yellow: '#FFD700',
+          'yellow-bright': '#FFFF00',
+          'yellow-dark': '#B8860B',
+          orange: '#FF8C00',
+          black: '#000000',
+          gray: '#1a1a1a',
+          // Keep secondary accent
           cyan: '#00ffff',
           magenta: '#ff00ff',
-          pink: '#ff2a6d',
-          blue: '#05d9e8',
-          purple: '#7b2cbf',
-          yellow: '#f0e68c',
-          green: '#39ff14',
         },
       },
       fontFamily: {
@@ -37,8 +39,8 @@ const config: Config = {
       },
       keyframes: {
         glow: {
-          '0%': { boxShadow: '0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff' },
-          '100%': { boxShadow: '0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff' },
+          '0%': { boxShadow: '0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700' },
+          '100%': { boxShadow: '0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700' },
         },
         scan: {
           '0%': { backgroundPosition: '0% -100%' },
@@ -54,7 +56,7 @@ const config: Config = {
         },
       },
       backgroundImage: {
-        'grid-pattern': 'linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px)',
+        'grid-pattern': 'linear-gradient(rgba(255, 215, 0, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 215, 0, 0.05) 1px, transparent 1px)',
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
       backgroundSize: {

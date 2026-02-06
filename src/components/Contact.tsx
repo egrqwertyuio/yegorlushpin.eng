@@ -42,8 +42,8 @@ export default function Contact() {
     <section id="contact" className="py-20 relative" ref={ref}>
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyber-cyan/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyber-magenta/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyber-yellow/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyber-orange/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,7 +54,7 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-cyber-cyan text-sm uppercase tracking-widest">
+          <span className="font-mono text-cyber-yellow text-sm uppercase tracking-widest">
             // Get In Touch
           </span>
           <h2 className="section-heading mt-4">
@@ -103,7 +103,7 @@ export default function Contact() {
                   transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                   className="cyber-card p-4 flex items-center gap-4 group"
                 >
-                  <div className="w-12 h-12 flex items-center justify-center bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan group-hover:bg-cyber-cyan/20 transition-colors">
+                  <div className="w-12 h-12 flex items-center justify-center bg-cyber-yellow/10 border border-cyber-yellow/30 text-cyber-yellow group-hover:bg-cyber-yellow/20 transition-colors">
                     <item.icon size={20} />
                   </div>
                   <div>
@@ -113,7 +113,7 @@ export default function Contact() {
                     {item.href ? (
                       <a
                         href={item.href}
-                        className="text-white hover:text-cyber-cyan transition-colors"
+                        className="text-white hover:text-cyber-yellow transition-colors"
                       >
                         {item.value}
                       </a>
@@ -127,7 +127,7 @@ export default function Contact() {
 
             {/* Social Links */}
             <div>
-              <h3 className="text-cyber-cyan font-mono text-sm uppercase tracking-wider mb-4">
+              <h3 className="text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-4">
                 Connect
               </h3>
               <div className="flex gap-4">
@@ -141,7 +141,7 @@ export default function Contact() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 flex items-center justify-center border border-cyber-cyan/30 text-cyber-cyan hover:bg-cyber-cyan/10 hover:border-cyber-cyan transition-all duration-300"
+                    className="w-12 h-12 flex items-center justify-center border border-cyber-yellow/30 text-cyber-yellow hover:bg-cyber-yellow/10 hover:border-cyber-yellow transition-all duration-300"
                     whileHover={{ scale: 1.1, y: -5 }}
                     whileTap={{ scale: 0.9 }}
                     aria-label={social.label}
@@ -170,9 +170,9 @@ export default function Contact() {
                 />
                 <defs>
                   <linearGradient id="circuit-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#00ffff" />
-                    <stop offset="50%" stopColor="#ff00ff" />
-                    <stop offset="100%" stopColor="#00ffff" />
+                    <stop offset="0%" stopColor="#FFD700" />
+                    <stop offset="50%" stopColor="#FF8C00" />
+                    <stop offset="100%" stopColor="#FFD700" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -190,7 +190,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-cyber-cyan font-mono text-sm uppercase tracking-wider mb-2"
+                  className="block text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-2"
                 >
                   Name
                 </label>
@@ -201,7 +201,7 @@ export default function Contact() {
                   value={formState.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-cyber-bg border border-cyber-cyan/30 text-white placeholder-gray-500 focus:border-cyber-cyan focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-cyber-bg border border-cyber-yellow/30 text-white placeholder-gray-500 focus:border-cyber-yellow focus:outline-none transition-colors"
                   placeholder="Your name"
                 />
               </div>
@@ -210,7 +210,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-cyber-cyan font-mono text-sm uppercase tracking-wider mb-2"
+                  className="block text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-2"
                 >
                   Email
                 </label>
@@ -221,7 +221,7 @@ export default function Contact() {
                   value={formState.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-cyber-bg border border-cyber-cyan/30 text-white placeholder-gray-500 focus:border-cyber-cyan focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-cyber-bg border border-cyber-yellow/30 text-white placeholder-gray-500 focus:border-cyber-yellow focus:outline-none transition-colors"
                   placeholder="your@email.com"
                 />
               </div>
@@ -230,7 +230,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-cyber-cyan font-mono text-sm uppercase tracking-wider mb-2"
+                  className="block text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-2"
                 >
                   Message
                 </label>
@@ -241,7 +241,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 bg-cyber-bg border border-cyber-cyan/30 text-white placeholder-gray-500 focus:border-cyber-cyan focus:outline-none transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-cyber-bg border border-cyber-yellow/30 text-white placeholder-gray-500 focus:border-cyber-yellow focus:outline-none transition-colors resize-none"
                   placeholder="Tell me about your project..."
                 />
               </div>
@@ -255,7 +255,7 @@ export default function Contact() {
                     ? 'bg-green-500 text-white'
                     : status === 'error'
                     ? 'bg-red-500 text-white'
-                    : 'bg-cyber-cyan text-cyber-bg hover:bg-cyber-cyan/90 hover:shadow-[0_0_30px_rgba(0,255,255,0.5)]'
+                    : 'bg-cyber-yellow text-cyber-bg hover:bg-cyber-yellow/90 hover:shadow-[0_0_30px_rgba(255,215,0,0.5)]'
                 }`}
                 style={{
                   clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)',

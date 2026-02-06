@@ -23,7 +23,7 @@ export default function Experience() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-cyber-cyan text-sm uppercase tracking-widest">
+          <span className="font-mono text-cyber-yellow text-sm uppercase tracking-widest">
             // Career Path
           </span>
           <h2 className="section-heading mt-4">
@@ -34,7 +34,7 @@ export default function Experience() {
         {/* Timeline */}
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-cyber-cyan via-cyber-magenta to-cyber-cyan transform md:-translate-x-1/2" />
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-cyber-yellow via-cyber-orange to-cyber-yellow transform md:-translate-x-1/2" />
 
           {/* Experience items */}
           {experienceData.map((exp, index) => (
@@ -49,9 +49,9 @@ export default function Experience() {
             >
               <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'} pl-8 md:pl-0`}>
                 {/* Timeline dot */}
-                <div className={`absolute left-0 md:left-1/2 top-0 w-4 h-4 bg-cyber-bg border-2 border-cyber-cyan rounded-full transform -translate-x-1/2 md:-translate-x-1/2`}>
+                <div className={`absolute left-0 md:left-1/2 top-0 w-4 h-4 bg-cyber-bg border-2 border-cyber-yellow rounded-full transform -translate-x-1/2 md:-translate-x-1/2`}>
                   <motion.div
-                    className="absolute inset-0 bg-cyber-cyan rounded-full"
+                    className="absolute inset-0 bg-cyber-yellow rounded-full"
                     animate={{ scale: [1, 1.5, 1], opacity: [1, 0, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
@@ -61,16 +61,16 @@ export default function Experience() {
                 <div className="cyber-card p-6 group">
                   {/* Period badge */}
                   <div className={`flex items-center gap-2 mb-4 ${index % 2 === 0 ? 'md:justify-end' : ''}`}>
-                    <Calendar className="w-4 h-4 text-cyber-cyan" />
-                    <span className="text-cyber-cyan font-mono text-sm">{exp.period}</span>
+                    <Calendar className="w-4 h-4 text-cyber-yellow" />
+                    <span className="text-cyber-yellow font-mono text-sm">{exp.period}</span>
                   </div>
 
                   {/* Title and Company */}
-                  <h3 className="text-xl font-semibold text-white group-hover:text-cyber-cyan transition-colors mb-1">
+                  <h3 className="text-xl font-semibold text-white group-hover:text-cyber-yellow transition-colors mb-1">
                     {exp.title}
                   </h3>
                   <div className={`flex items-center gap-4 mb-4 text-sm ${index % 2 === 0 ? 'md:justify-end' : ''}`}>
-                    <span className="flex items-center gap-1 text-cyber-magenta">
+                    <span className="flex items-center gap-1 text-cyber-orange">
                       <Briefcase className="w-4 h-4" />
                       {exp.company}
                     </span>
@@ -92,14 +92,14 @@ export default function Experience() {
                         key={i}
                         className={`flex items-start gap-2 text-sm ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
                       >
-                        <ChevronRight className="w-4 h-4 text-cyber-cyan flex-shrink-0 mt-0.5" />
+                        <ChevronRight className="w-4 h-4 text-cyber-yellow flex-shrink-0 mt-0.5" />
                         <span className="text-gray-300">{achievement}</span>
                       </div>
                     ))}
                   </div>
 
                   {/* Decorative corner */}
-                  <div className={`absolute ${index % 2 === 0 ? 'top-0 left-0' : 'top-0 right-0'} w-4 h-4 border-t-2 ${index % 2 === 0 ? 'border-l-2' : 'border-r-2'} border-cyber-cyan/50 opacity-0 group-hover:opacity-100 transition-opacity`} />
+                  <div className={`absolute ${index % 2 === 0 ? 'top-0 left-0' : 'top-0 right-0'} w-4 h-4 border-t-2 ${index % 2 === 0 ? 'border-l-2' : 'border-r-2'} border-cyber-yellow/50 opacity-0 group-hover:opacity-100 transition-opacity`} />
                 </div>
               </div>
             </motion.div>
@@ -115,7 +115,7 @@ export default function Experience() {
         >
           <motion.a
             href="/resume.pdf"
-            className="inline-flex items-center gap-2 px-8 py-4 border border-cyber-cyan text-cyber-cyan font-mono uppercase tracking-wider hover:bg-cyber-cyan/10 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-4 border border-cyber-yellow text-cyber-yellow font-mono uppercase tracking-wider hover:bg-cyber-yellow/10 transition-all duration-300"
             style={{
               clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)',
             }}

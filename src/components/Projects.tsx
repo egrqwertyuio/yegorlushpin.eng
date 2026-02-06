@@ -21,8 +21,8 @@ export default function Projects() {
     <section id="projects" className="py-20 relative" ref={ref}>
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-0 w-72 h-72 bg-cyber-magenta/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-cyber-cyan/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-0 w-72 h-72 bg-cyber-orange/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-cyber-yellow/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,7 +33,7 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-cyber-cyan text-sm uppercase tracking-widest">
+          <span className="font-mono text-cyber-yellow text-sm uppercase tracking-widest">
             // Featured Work
           </span>
           <h2 className="section-heading mt-4">
@@ -54,8 +54,8 @@ export default function Projects() {
               onClick={() => setFilter(category)}
               className={`px-5 py-2 font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
                 filter === category
-                  ? 'bg-cyber-cyan/20 border border-cyber-cyan text-cyber-cyan'
-                  : 'border border-gray-700 text-gray-400 hover:border-cyber-cyan/50 hover:text-gray-300'
+                  ? 'bg-cyber-yellow/20 border border-cyber-yellow text-cyber-yellow'
+                  : 'border border-gray-700 text-gray-400 hover:border-cyber-yellow/50 hover:text-gray-300'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -84,8 +84,8 @@ export default function Projects() {
                 {/* Project Image */}
                 <div className="relative aspect-video bg-cyber-bg overflow-hidden">
                   {/* Placeholder image */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-cyber-cyan/10 to-cyber-magenta/10">
-                    <Folder className="w-16 h-16 text-cyber-cyan/30" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-cyber-yellow/10 to-cyber-orange/10">
+                    <Folder className="w-16 h-16 text-cyber-yellow/30" />
                   </div>
 
                   {/* Hover overlay */}
@@ -95,7 +95,7 @@ export default function Projects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-12 h-12 flex items-center justify-center bg-cyber-cyan/20 border border-cyber-cyan text-cyber-cyan hover:bg-cyber-cyan hover:text-cyber-bg transition-colors"
+                        className="w-12 h-12 flex items-center justify-center bg-cyber-yellow/20 border border-cyber-yellow text-cyber-yellow hover:bg-cyber-yellow hover:text-cyber-bg transition-colors"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                       >
@@ -107,7 +107,7 @@ export default function Projects() {
                         href={project.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-12 h-12 flex items-center justify-center bg-cyber-magenta/20 border border-cyber-magenta text-cyber-magenta hover:bg-cyber-magenta hover:text-cyber-bg transition-colors"
+                        className="w-12 h-12 flex items-center justify-center bg-cyber-orange/20 border border-cyber-orange text-cyber-orange hover:bg-cyber-orange hover:text-cyber-bg transition-colors"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                       >
@@ -118,20 +118,20 @@ export default function Projects() {
 
                   {/* Featured badge */}
                   {project.featured && (
-                    <div className="absolute top-3 right-3 px-2 py-1 bg-cyber-magenta/20 border border-cyber-magenta text-cyber-magenta text-xs font-mono">
+                    <div className="absolute top-3 right-3 px-2 py-1 bg-cyber-orange/20 border border-cyber-orange text-cyber-orange text-xs font-mono">
                       Featured
                     </div>
                   )}
 
                   {/* Category badge */}
-                  <div className="absolute top-3 left-3 px-2 py-1 bg-cyber-cyan/20 border border-cyber-cyan/50 text-cyber-cyan text-xs font-mono">
+                  <div className="absolute top-3 left-3 px-2 py-1 bg-cyber-yellow/20 border border-cyber-yellow/50 text-cyber-yellow text-xs font-mono">
                     {project.category}
                   </div>
                 </div>
 
                 {/* Project Info */}
                 <div className="flex-1 p-6 flex flex-col">
-                  <h3 className="text-xl font-semibold text-white group-hover:text-cyber-cyan transition-colors mb-2">
+                  <h3 className="text-xl font-semibold text-white group-hover:text-cyber-yellow transition-colors mb-2">
                     {project.title}
                   </h3>
                   <p className="text-gray-400 text-sm flex-1 mb-4">
@@ -162,7 +162,7 @@ export default function Projects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-sm text-gray-400 hover:text-cyber-cyan transition-colors"
+                        className="flex items-center gap-1 text-sm text-gray-400 hover:text-cyber-yellow transition-colors"
                       >
                         <Github size={16} />
                         <span>Code</span>
@@ -173,14 +173,14 @@ export default function Projects() {
                         href={project.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-sm text-gray-400 hover:text-cyber-magenta transition-colors"
+                        className="flex items-center gap-1 text-sm text-gray-400 hover:text-cyber-orange transition-colors"
                       >
                         <ExternalLink size={16} />
                         <span>Demo</span>
                       </a>
                     )}
                     <motion.span
-                      className="ml-auto text-cyber-cyan/50 group-hover:text-cyber-cyan transition-colors"
+                      className="ml-auto text-cyber-yellow/50 group-hover:text-cyber-yellow transition-colors"
                       animate={{ x: [0, 5, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
                     >
@@ -204,7 +204,7 @@ export default function Projects() {
             href={projectsData[0]?.github?.replace(/\/[^\/]*$/, '') || '#'}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-cyber-cyan hover:text-cyber-magenta transition-colors font-mono"
+            className="inline-flex items-center gap-2 text-cyber-yellow hover:text-cyber-orange transition-colors font-mono"
             whileHover={{ x: 5 }}
           >
             View all projects on GitHub

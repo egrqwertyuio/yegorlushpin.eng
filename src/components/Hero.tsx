@@ -10,16 +10,16 @@ export default function Hero() {
       {/* Animated background elements */}
       <div className="absolute inset-0">
         {/* Grid lines */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,215,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,215,0,0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
 
         {/* Radial gradient */}
-        <div className="absolute inset-0 bg-gradient-radial from-cyber-cyan/5 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-radial from-cyber-yellow/5 via-transparent to-transparent" />
 
         {/* Floating circuit elements */}
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-cyber-cyan/30 rounded-full"
+            className="absolute w-2 h-2 bg-cyber-yellow/30 rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -46,8 +46,8 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="mb-6"
           >
-            <span className="inline-block font-mono text-cyber-cyan text-sm bg-cyber-cyan/10 px-4 py-2 rounded-sm border border-cyber-cyan/30">
-              <span className="text-cyber-magenta">$</span> ./initialize_engineer.sh
+            <span className="inline-block font-mono text-cyber-yellow text-sm bg-cyber-yellow/10 px-4 py-2 rounded-sm border border-cyber-yellow/30">
+              <span className="text-cyber-orange">$</span> ./initialize_engineer.sh
             </span>
           </motion.div>
 
@@ -60,7 +60,7 @@ export default function Hero() {
           >
             <span className="text-white">{siteConfig.name.split(' ')[0]}</span>
             <br />
-            <span className="bg-gradient-to-r from-cyber-cyan via-cyber-blue to-cyber-magenta bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyber-yellow via-cyber-orange to-cyber-yellow bg-clip-text text-transparent">
               {siteConfig.name.split(' ')[1]}
             </span>
           </motion.h1>
@@ -73,11 +73,11 @@ export default function Hero() {
             className="mb-6"
           >
             <h2 className="text-xl md:text-2xl lg:text-3xl font-mono text-gray-300">
-              <span className="text-cyber-cyan">&lt;</span>
+              <span className="text-cyber-yellow">&lt;</span>
               {siteConfig.title}
-              <span className="text-cyber-cyan">/&gt;</span>
+              <span className="text-cyber-yellow">/&gt;</span>
             </h2>
-            <p className="text-cyber-magenta font-mono mt-2">
+            <p className="text-cyber-orange font-mono mt-2">
               {siteConfig.subtitle}
             </p>
           </motion.div>
@@ -101,7 +101,7 @@ export default function Hero() {
           >
             <motion.a
               href="#projects"
-              className="group flex items-center gap-2 px-8 py-4 bg-cyber-cyan text-cyber-bg font-mono font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-cyber-cyan/90 hover:shadow-[0_0_30px_rgba(0,255,255,0.5)]"
+              className="group flex items-center gap-2 px-8 py-4 bg-cyber-yellow text-cyber-bg font-mono font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-cyber-yellow-bright hover:shadow-[0_0_30px_rgba(255,215,0,0.5)]"
               style={{
                 clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)',
               }}
@@ -114,7 +114,7 @@ export default function Hero() {
 
             <motion.a
               href={siteConfig.resumeUrl}
-              className="flex items-center gap-2 px-8 py-4 border border-cyber-cyan text-cyber-cyan font-mono font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-cyber-cyan/10"
+              className="flex items-center gap-2 px-8 py-4 border border-cyber-yellow text-cyber-yellow font-mono font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-cyber-yellow/10"
               style={{
                 clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)',
               }}
@@ -127,7 +127,7 @@ export default function Hero() {
 
             <motion.a
               href="#contact"
-              className="flex items-center gap-2 px-8 py-4 border border-cyber-magenta text-cyber-magenta font-mono font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-cyber-magenta/10"
+              className="flex items-center gap-2 px-8 py-4 border border-cyber-orange text-cyber-orange font-mono font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-cyber-orange/10"
               style={{
                 clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)',
               }}
@@ -156,7 +156,7 @@ export default function Hero() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 flex items-center justify-center border border-cyber-cyan/30 text-cyber-cyan/70 hover:text-cyber-cyan hover:border-cyber-cyan transition-all duration-300"
+                className="w-12 h-12 flex items-center justify-center border border-cyber-yellow/30 text-cyber-yellow/70 hover:text-cyber-yellow hover:border-cyber-yellow transition-all duration-300"
                 whileHover={{ scale: 1.1, y: -5 }}
                 whileTap={{ scale: 0.9 }}
                 aria-label={social.label}
@@ -177,7 +177,7 @@ export default function Hero() {
       >
         <motion.a
           href="#about"
-          className="flex flex-col items-center gap-2 text-cyber-cyan/50 hover:text-cyber-cyan transition-colors"
+          className="flex flex-col items-center gap-2 text-cyber-yellow/50 hover:text-cyber-yellow transition-colors"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
@@ -187,10 +187,10 @@ export default function Hero() {
       </motion.div>
 
       {/* Corner decorations */}
-      <div className="absolute top-20 left-4 w-20 h-20 border-l-2 border-t-2 border-cyber-cyan/30" />
-      <div className="absolute top-20 right-4 w-20 h-20 border-r-2 border-t-2 border-cyber-cyan/30" />
-      <div className="absolute bottom-20 left-4 w-20 h-20 border-l-2 border-b-2 border-cyber-magenta/30" />
-      <div className="absolute bottom-20 right-4 w-20 h-20 border-r-2 border-b-2 border-cyber-magenta/30" />
+      <div className="absolute top-20 left-4 w-20 h-20 border-l-2 border-t-2 border-cyber-yellow/30" />
+      <div className="absolute top-20 right-4 w-20 h-20 border-r-2 border-t-2 border-cyber-yellow/30" />
+      <div className="absolute bottom-20 left-4 w-20 h-20 border-l-2 border-b-2 border-cyber-orange/30" />
+      <div className="absolute bottom-20 right-4 w-20 h-20 border-r-2 border-b-2 border-cyber-orange/30" />
     </section>
   )
 }
