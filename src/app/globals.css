@@ -182,7 +182,10 @@ body {
 /* Section headings - Yellow gradient */
 .section-heading {
   @apply text-3xl md:text-4xl font-display font-bold mb-8;
-  @apply bg-gradient-to-r from-cyber-yellow to-cyber-orange bg-clip-text text-transparent;
+  background: linear-gradient(to right, #FFD700, #FF8C00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Animated underline - Yellow */

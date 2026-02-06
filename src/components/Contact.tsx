@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { Send, Mail, MapPin, Clock, Github, Linkedin, CheckCircle, AlertCircle } from 'lucide-react'
+import { Send, Mail, MapPin, Clock, Github, Linkedin, CheckCircle, AlertCircle, Phone } from 'lucide-react'
 import { siteConfig } from '@/lib/data'
 
 export default function Contact() {
@@ -82,6 +82,12 @@ export default function Contact() {
                   label: 'Email',
                   value: siteConfig.email,
                   href: `mailto:${siteConfig.email}`,
+                },
+                {
+                  icon: Phone,
+                  label: 'Phone',
+                  value: siteConfig.phone,
+                  href: `tel:${siteConfig.phone?.replace(/[^0-9]/g, '')}`,
                 },
                 {
                   icon: MapPin,

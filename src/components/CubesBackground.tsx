@@ -1,18 +1,15 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import { motion, AnimatePresence } from 'framer-motion'
 import './Cubes.css'
 
-interface CubesProps {
+interface CubesBackgroundProps {
   gridSize?: number
-  cubeSize?: number
   maxAngle?: number
   radius?: number
   easing?: string
   duration?: { enter: number; leave: number }
-  cellGap?: number | { col?: number; row?: number }
   borderStyle?: string
   faceColor?: string
   shadow?: boolean | string
@@ -20,17 +17,14 @@ interface CubesProps {
   rippleOnClick?: boolean
   rippleColor?: string
   rippleSpeed?: number
-  textLines?: { text: string; row: number; startCol: number; className?: string }[]
 }
 
-function Cubes({
-  gridSize = 10,
-  cubeSize,
+export default function CubesBackground({
+  gridSize = 13,
   maxAngle = 45,
   radius = 3,
   easing = 'power3.out',
   duration = { enter: 0.3, leave: 0.6 },
-  cellGap,
   borderStyle = '1px dashed rgba(255, 215, 0, 0.4)',
   faceColor = 'rgba(10, 10, 20, 0.8)',
   shadow = false,
@@ -38,8 +32,7 @@ function Cubes({
   rippleOnClick = true,
   rippleColor = '#FFD700',
   rippleSpeed = 2,
-  textLines = []
-}: CubesProps) {
+}: CubesBackgroundProps) {
   const sceneRef = useRef<HTMLDivElement>(null)
   const rafRef = useRef<number | null>(null)
   const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -48,23 +41,8 @@ function Cubes({
   const simTargetRef = useRef({ x: 0, y: 0 })
   const simRAFRef = useRef<number | null>(null)
 
-  const colGap = typeof cellGap === 'number' ? `${cellGap}px` : cellGap?.col !== undefined ? `${cellGap.col}px` : '5%'
-  const rowGap = typeof cellGap === 'number' ? `${cellGap}px` : cellGap?.row !== undefined ? `${cellGap.row}px` : '5%'
-
   const enterDur = duration.enter
   const leaveDur = duration.leave
-
-  // Create a map of cell positions to their text content
-  const textMap = new Map<string, { char: string; className?: string }>()
-  textLines.forEach(line => {
-    const chars = line.text.split('')
-    chars.forEach((char, i) => {
-      const col = line.startCol + i
-      if (col < gridSize) {
-        textMap.set(`${line.row}-${col}`, { char, className: line.className })
-      }
-    })
-  })
 
   const tiltAt = useCallback(
     (rowCenter: number, colCenter: number) => {
@@ -293,152 +271,34 @@ function Cubes({
 
   const cells = Array.from({ length: gridSize })
   const sceneStyle: React.CSSProperties = {
-    gridTemplateColumns: cubeSize ? `repeat(${gridSize}, ${cubeSize}px)` : `repeat(${gridSize}, 1fr)`,
-    gridTemplateRows: cubeSize ? `repeat(${gridSize}, ${cubeSize}px)` : `repeat(${gridSize}, 1fr)`,
-    columnGap: colGap,
-    rowGap: rowGap
+    gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
+    gridTemplateRows: `repeat(${gridSize}, 1fr)`,
+    columnGap: '5%',
+    rowGap: '5%'
   }
   const wrapperStyle: React.CSSProperties = {
     // @ts-expect-error CSS custom properties
     '--cube-face-border': borderStyle,
     '--cube-face-bg': faceColor,
     '--cube-face-shadow': shadow === true ? '0 0 6px rgba(255,215,0,.3)' : shadow || 'none',
-    ...(cubeSize
-      ? {
-          width: `${gridSize * cubeSize}px`,
-          height: `${gridSize * cubeSize}px`
-        }
-      : {})
   }
 
   return (
     <div className="default-animation" style={wrapperStyle}>
       <div ref={sceneRef} className="default-animation--scene" style={sceneStyle}>
         {cells.map((_, r) =>
-          cells.map((__, c) => {
-            const cellText = textMap.get(`${r}-${c}`)
-            return (
-              <div key={`${r}-${c}`} className="cube" data-row={r} data-col={c}>
-                <div className="cube-face cube-face--top" />
-                <div className="cube-face cube-face--bottom" />
-                <div className="cube-face cube-face--left" />
-                <div className="cube-face cube-face--right" />
-                <div className={`cube-face cube-face--front ${cellText ? 'has-text' : ''}`}>
-                  {cellText && (
-                    <span className={cellText.className || 'cube-text'}>
-                      {cellText.char}
-                    </span>
-                  )}
-                </div>
-                <div className="cube-face cube-face--back" />
-              </div>
-            )
-          })
+          cells.map((__, c) => (
+            <div key={`${r}-${c}`} className="cube" data-row={r} data-col={c}>
+              <div className="cube-face cube-face--top" />
+              <div className="cube-face cube-face--bottom" />
+              <div className="cube-face cube-face--left" />
+              <div className="cube-face cube-face--right" />
+              <div className="cube-face cube-face--front" />
+              <div className="cube-face cube-face--back" />
+            </div>
+          ))
         )}
       </div>
     </div>
-  )
-}
-
-export default function CubesIntro({
-  name = "YEGOR LUSHPIN",
-  onEnter,
-}: {
-  name?: string
-  onEnter: () => void
-}) {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return (
-      <div className="fixed inset-0 bg-black z-50" />
-    )
-  }
-
-  // Calculate text positions for the grid
-  const gridSize = 13
-
-  // Name centered on row 4 (0-indexed, raised from 5)
-  const nameStartCol = Math.floor((gridSize - name.length) / 2)
-
-  // "CLICK TO ENTER" on row 8
-  const clickText = "CLICK TO ENTER"
-  const clickStartCol = Math.floor((gridSize - clickText.length) / 2)
-
-  const textLines = [
-    { text: name, row: 4, startCol: Math.max(0, nameStartCol), className: 'cube-text-name' },
-    { text: clickText, row: 8, startCol: Math.max(0, clickStartCol), className: 'cube-text-small' },
-  ]
-
-  return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
-        className="fixed inset-0 bg-[#060010] z-50 cursor-pointer overflow-hidden"
-        onClick={onEnter}
-      >
-        {/* Cubes with integrated text */}
-        <div className="absolute inset-0 p-4 md:p-8">
-          <Cubes
-            gridSize={gridSize}
-            maxAngle={45}
-            radius={3}
-            borderStyle="1px dashed rgba(255, 215, 0, 0.4)"
-            faceColor="rgba(10, 10, 20, 0.8)"
-            rippleColor="#FFD700"
-            rippleSpeed={2}
-            autoAnimate={true}
-            rippleOnClick={true}
-            shadow={true}
-            textLines={textLines}
-          />
-        </div>
-
-        {/* Corner decorations */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="absolute top-4 left-4 w-12 h-12 border-l-2 border-t-2 border-cyber-yellow/50 pointer-events-none"
-        />
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="absolute top-4 right-4 w-12 h-12 border-r-2 border-t-2 border-cyber-yellow/50 pointer-events-none"
-        />
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-          className="absolute bottom-4 left-4 w-12 h-12 border-l-2 border-b-2 border-cyber-yellow/50 pointer-events-none"
-        />
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-          className="absolute bottom-4 right-4 w-12 h-12 border-r-2 border-b-2 border-cyber-yellow/50 pointer-events-none"
-        />
-
-        {/* Scan lines overlay */}
-        <div className="absolute inset-0 pointer-events-none opacity-20">
-          <div className="w-full h-full bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(255,215,0,0.03)_2px,rgba(255,215,0,0.03)_4px)]" />
-        </div>
-
-        {/* Animated scan line */}
-        <motion.div
-          initial={{ top: '-5%' }}
-          animate={{ top: '105%' }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-          className="absolute left-0 right-0 h-1 bg-gradient-to-b from-transparent via-cyber-yellow/20 to-transparent pointer-events-none"
-        />
-      </motion.div>
-    </AnimatePresence>
   )
 }

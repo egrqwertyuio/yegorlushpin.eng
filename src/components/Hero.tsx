@@ -1,40 +1,32 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Mail, FileText, ChevronRight } from 'lucide-react'
 import { siteConfig } from '@/lib/data'
 
+const CubesBackground = dynamic(() => import('./CubesBackground'), {
+  ssr: false,
+  loading: () => null,
+})
+
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0">
-        {/* Grid lines */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,215,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,215,0,0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
-
-        {/* Radial gradient */}
-        <div className="absolute inset-0 bg-gradient-radial from-cyber-yellow/5 via-transparent to-transparent" />
-
-        {/* Floating circuit elements */}
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-cyber-yellow/30 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.3, 0.8, 0.3],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#060010]">
+      {/* Cubes background */}
+      <div className="absolute inset-0 p-4 md:p-8">
+        <CubesBackground
+          gridSize={13}
+          maxAngle={45}
+          radius={3}
+          borderStyle="1px dashed rgba(255, 215, 0, 0.4)"
+          faceColor="rgba(10, 10, 20, 0.8)"
+          rippleColor="#FFD700"
+          rippleSpeed={2}
+          autoAnimate={true}
+          rippleOnClick={true}
+          shadow={true}
+        />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
