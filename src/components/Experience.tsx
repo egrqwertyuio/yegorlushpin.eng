@@ -34,76 +34,86 @@ export default function Experience() {
         {/* Timeline */}
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-cyber-yellow via-cyber-orange to-cyber-yellow transform md:-translate-x-1/2" />
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-cyber-yellow via-cyber-orange to-cyber-yellow" />
 
           {/* Experience items */}
-          {experienceData.map((exp, index) => (
-            <motion.div
-              key={exp.id}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className={`relative mb-12 md:mb-0 md:pb-12 ${
-                index % 2 === 0 ? 'md:pr-1/2 md:text-right' : 'md:pl-1/2 md:ml-auto'
-              }`}
-            >
-              <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'} pl-8 md:pl-0`}>
+          {experienceData.map((exp, index) => {
+            const isLeft = index % 2 === 0
+
+            return (
+              <motion.div
+                key={exp.id}
+                initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="relative mb-12 last:mb-0"
+              >
                 {/* Timeline dot */}
-                <div className={`absolute left-0 md:left-1/2 top-0 w-4 h-4 bg-cyber-bg border-2 border-cyber-yellow rounded-full transform -translate-x-1/2 md:-translate-x-1/2`}>
+                <div className="absolute left-4 md:left-1/2 top-6 w-4 h-4 bg-cyber-bg border-2 border-cyber-yellow rounded-full -translate-x-1/2 z-10">
                   <motion.div
                     className="absolute inset-0 bg-cyber-yellow rounded-full"
                     animate={{ scale: [1, 1.5, 1], opacity: [1, 0, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
+                    transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
                   />
                 </div>
 
-                {/* Content card */}
-                <div className="cyber-card p-6 group">
-                  {/* Period badge */}
-                  <div className={`flex items-center gap-2 mb-4 ${index % 2 === 0 ? 'md:justify-end' : ''}`}>
-                    <Calendar className="w-4 h-4 text-cyber-yellow" />
-                    <span className="text-cyber-yellow font-mono text-sm">{exp.period}</span>
+                {/* Connector line - desktop only */}
+                <div className={`hidden md:block absolute top-7 h-px w-8 bg-cyber-yellow/50 ${
+                  isLeft ? 'left-1/2 ml-2' : 'right-1/2 mr-2'
+                }`} />
+
+                {/* Card container */}
+                <div className={`
+                  pl-12 md:pl-0
+                  md:w-[calc(50%-2rem)]
+                  ${isLeft ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'}
+                `}>
+                  <div className="cyber-card p-6 group">
+                    {/* Period badge */}
+                    <div className={`flex items-center gap-2 mb-4 ${isLeft ? 'md:justify-end' : ''}`}>
+                      <Calendar className="w-4 h-4 text-cyber-yellow" />
+                      <span className="text-cyber-yellow font-mono text-sm">{exp.period}</span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className={`text-xl font-semibold text-white group-hover:text-cyber-yellow transition-colors mb-1 ${isLeft ? 'md:text-right' : ''}`}>
+                      {exp.title}
+                    </h3>
+
+                    {/* Company and Location */}
+                    <div className={`flex items-center gap-4 mb-4 text-sm flex-wrap ${isLeft ? 'md:justify-end' : ''}`}>
+                      <span className="flex items-center gap-1 text-cyber-orange">
+                        <Briefcase className="w-4 h-4" />
+                        {exp.company}
+                      </span>
+                      <span className="flex items-center gap-1 text-gray-500">
+                        <MapPin className="w-4 h-4" />
+                        {exp.location}
+                      </span>
+                    </div>
+
+                    {/* Description */}
+                    <p className={`text-gray-400 text-sm mb-4 ${isLeft ? 'md:text-right' : ''}`}>
+                      {exp.description}
+                    </p>
+
+                    {/* Achievements */}
+                    <div className="space-y-2">
+                      {exp.achievements.map((achievement, i) => (
+                        <div
+                          key={i}
+                          className={`flex items-start gap-2 text-sm ${isLeft ? 'md:flex-row-reverse md:text-right' : ''}`}
+                        >
+                          <ChevronRight className={`w-4 h-4 text-cyber-yellow flex-shrink-0 mt-0.5 ${isLeft ? 'md:rotate-180' : ''}`} />
+                          <span className="text-gray-300">{achievement}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-
-                  {/* Title and Company */}
-                  <h3 className="text-xl font-semibold text-white group-hover:text-cyber-yellow transition-colors mb-1">
-                    {exp.title}
-                  </h3>
-                  <div className={`flex items-center gap-4 mb-4 text-sm ${index % 2 === 0 ? 'md:justify-end' : ''}`}>
-                    <span className="flex items-center gap-1 text-cyber-orange">
-                      <Briefcase className="w-4 h-4" />
-                      {exp.company}
-                    </span>
-                    <span className="flex items-center gap-1 text-gray-500">
-                      <MapPin className="w-4 h-4" />
-                      {exp.location}
-                    </span>
-                  </div>
-
-                  {/* Description */}
-                  <p className={`text-gray-400 text-sm mb-4 ${index % 2 === 0 ? 'md:text-right' : ''}`}>
-                    {exp.description}
-                  </p>
-
-                  {/* Achievements */}
-                  <div className="space-y-2">
-                    {exp.achievements.map((achievement, i) => (
-                      <div
-                        key={i}
-                        className={`flex items-start gap-2 text-sm ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
-                      >
-                        <ChevronRight className="w-4 h-4 text-cyber-yellow flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">{achievement}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Decorative corner */}
-                  <div className={`absolute ${index % 2 === 0 ? 'top-0 left-0' : 'top-0 right-0'} w-4 h-4 border-t-2 ${index % 2 === 0 ? 'border-l-2' : 'border-r-2'} border-cyber-yellow/50 opacity-0 group-hover:opacity-100 transition-opacity`} />
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            )
+          })}
         </div>
 
         {/* Download Resume CTA */}

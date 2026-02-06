@@ -3,10 +3,11 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { ExternalLink, Github, Folder, ChevronRight } from 'lucide-react'
+import { ExternalLink, Github, ChevronRight } from 'lucide-react'
 import { projectsData } from '@/lib/data'
+import ImageStack from './ImageStack'
 
-const categories = ['All', 'Hardware', 'IoT', 'Firmware', 'Personal']
+const categories = ['All', 'Hardware', 'Software', 'Personal']
 
 export default function Projects() {
   const ref = useRef(null)
@@ -68,7 +69,7 @@ export default function Projects() {
         {/* Projects Grid */}
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {filteredProjects.map((project, index) => (
             <motion.div
@@ -81,56 +82,28 @@ export default function Projects() {
               className="group"
             >
               <div className="cyber-card h-full flex flex-col overflow-hidden">
-                {/* Project Image */}
-                <div className="relative aspect-video bg-cyber-bg overflow-hidden">
-                  {/* Placeholder image */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-cyber-yellow/10 to-cyber-orange/10">
-                    <Folder className="w-16 h-16 text-cyber-yellow/30" />
-                  </div>
-
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-cyber-bg/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-                    {project.github && (
-                      <motion.a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-12 h-12 flex items-center justify-center bg-cyber-yellow/20 border border-cyber-yellow text-cyber-yellow hover:bg-cyber-yellow hover:text-cyber-bg transition-colors"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <Github size={20} />
-                      </motion.a>
-                    )}
-                    {project.demo && (
-                      <motion.a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-12 h-12 flex items-center justify-center bg-cyber-orange/20 border border-cyber-orange text-cyber-orange hover:bg-cyber-orange hover:text-cyber-bg transition-colors"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <ExternalLink size={20} />
-                      </motion.a>
-                    )}
-                  </div>
+                {/* Project Gallery */}
+                <div className="relative overflow-hidden p-4 pb-2">
+                  <ImageStack
+                    items={project.gallery || []}
+                    title={project.title}
+                  />
 
                   {/* Featured badge */}
                   {project.featured && (
-                    <div className="absolute top-3 right-3 px-2 py-1 bg-cyber-orange/20 border border-cyber-orange text-cyber-orange text-xs font-mono">
+                    <div className="absolute top-6 right-6 px-2 py-1 bg-cyber-orange/90 border border-cyber-orange text-white text-xs font-mono z-50">
                       Featured
                     </div>
                   )}
 
                   {/* Category badge */}
-                  <div className="absolute top-3 left-3 px-2 py-1 bg-cyber-yellow/20 border border-cyber-yellow/50 text-cyber-yellow text-xs font-mono">
+                  <div className="absolute top-6 left-6 px-2 py-1 bg-cyber-yellow/90 border border-cyber-yellow text-cyber-bg text-xs font-mono z-50">
                     {project.category}
                   </div>
                 </div>
 
                 {/* Project Info */}
-                <div className="flex-1 p-6 flex flex-col">
+                <div className="flex-1 p-6 pt-2 flex flex-col">
                   <h3 className="text-xl font-semibold text-white group-hover:text-cyber-yellow transition-colors mb-2">
                     {project.title}
                   </h3>
@@ -201,7 +174,7 @@ export default function Projects() {
           className="mt-12 text-center"
         >
           <motion.a
-            href={projectsData[0]?.github?.replace(/\/[^\/]*$/, '') || '#'}
+            href="https://github.com/yegorlushpin"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-cyber-yellow hover:text-cyber-orange transition-colors font-mono"

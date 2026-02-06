@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
+import Image from 'next/image'
 import { Cpu, CircuitBoard, Wifi, Zap, GraduationCap, Award } from 'lucide-react'
 import { aboutData, siteConfig } from '@/lib/data'
 
@@ -45,15 +46,17 @@ export default function About() {
             className="relative"
           >
             <div className="relative aspect-square max-w-md mx-auto">
-              {/* Placeholder for profile image - replace with actual image */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cyber-yellow/20 to-cyber-orange/20 rounded-sm border border-cyber-yellow/30">
-                <div className="absolute inset-4 border border-dashed border-cyber-yellow/30 rounded-sm flex items-center justify-center">
-                  <div className="text-center">
-                    <CircuitBoard className="w-24 h-24 text-cyber-yellow/50 mx-auto mb-4" />
-                    <p className="text-gray-500 font-mono text-sm">Profile Image</p>
-                    <p className="text-gray-600 font-mono text-xs mt-1">Replace in public/images/</p>
-                  </div>
-                </div>
+              {/* Profile image */}
+              <div className="absolute inset-0 rounded-sm border border-cyber-yellow/30 overflow-hidden">
+                <Image
+                  src="/images/lushpiev@mail.uc.edu-1.jpg"
+                  alt="Yegor Lushpin"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-cyber-bg/80 via-transparent to-transparent" />
               </div>
 
               {/* Decorative elements */}
