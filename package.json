@@ -1,0 +1,33 @@
+{
+  "name": "yegorlushpin.eng",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egrqwertyuio/yegorlushpin.eng.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/egrqwertyuio/yegorlushpin.eng/issues"
+  },
+  "homepage": "https://github.com/egrqwertyuio/yegorlushpin.eng#readme",
+  "dependencies": {
+    "@types/node": "^25.2.1",
+    "@types/react": "^19.2.13",
+    "autoprefixer": "^10.4.24",
+    "framer-motion": "^12.33.0",
+    "lucide-react": "^0.563.0",
+    "next": "^14.2.35",
+    "postcss": "^8.5.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3"
+  }
+}
