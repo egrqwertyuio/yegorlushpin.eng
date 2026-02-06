@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --cyber-cyan: #00ffff;
+  --cyber-magenta: #ff00ff;
+  --cyber-pink: #ff2a6d;
+  --cyber-blue: #05d9e8;
+  --cyber-bg: #0a0a0f;
+  --cyber-bg-light: #12121a;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--cyber-bg);
+  color: #ffffff;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cyber-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cyber-cyan);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyber-magenta);
+}
+
+/* Selection styling */
+::selection {
+  background: var(--cyber-magenta);
+  color: white;
+}
+
+/* Cyberpunk grid background */
+.cyber-grid {
+  background-image:
+    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Glow effects */
+.glow-cyan {
+  box-shadow: 0 0 5px var(--cyber-cyan), 0 0 10px var(--cyber-cyan), 0 0 20px var(--cyber-cyan);
+}
+
+.glow-magenta {
+  box-shadow: 0 0 5px var(--cyber-magenta), 0 0 10px var(--cyber-magenta), 0 0 20px var(--cyber-magenta);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 10px var(--cyber-cyan), 0 0 20px var(--cyber-cyan), 0 0 30px var(--cyber-cyan);
+}
+
+.text-glow-magenta {
+  text-shadow: 0 0 10px var(--cyber-magenta), 0 0 20px var(--cyber-magenta), 0 0 30px var(--cyber-magenta);
+}
+
+/* Scan line effect */
+.scan-lines::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Glitch effect */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.glitch:hover {
+  animation: glitch 0.3s infinite;
+}
+
+/* Neon border */
+.neon-border {
+  border: 1px solid var(--cyber-cyan);
+  box-shadow:
+    inset 0 0 10px rgba(0, 255, 255, 0.1),
+    0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.neon-border:hover {
+  box-shadow:
+    inset 0 0 20px rgba(0, 255, 255, 0.2),
+    0 0 20px rgba(0, 255, 255, 0.4);
+}
+
+/* Circuit pattern background */
+.circuit-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v10m0 10v10m0 10v10m0 10v10M0 30h10m10 0h10m10 0h10m10 0h10' stroke='%2300ffff' stroke-width='0.5' stroke-opacity='0.1' fill='none'/%3E%3Ccircle cx='30' cy='30' r='2' fill='%2300ffff' fill-opacity='0.1'/%3E%3C/svg%3E");
+}
+
+/* Button styles */
+.cyber-button {
+  @apply relative px-6 py-3 font-mono font-semibold uppercase tracking-wider;
+  @apply bg-transparent border border-cyber-cyan text-cyber-cyan;
+  @apply transition-all duration-300 ease-out;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.cyber-button::before {
+  content: '';
+  @apply absolute inset-0 bg-cyber-cyan opacity-0 transition-opacity duration-300;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.cyber-button:hover::before {
+  @apply opacity-10;
+}
+
+.cyber-button:hover {
+  @apply text-white;
+  box-shadow: 0 0 20px var(--cyber-cyan), inset 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+/* Card styles */
+.cyber-card {
+  @apply relative bg-cyber-bg-light border border-cyber-cyan/20 rounded-sm;
+  @apply transition-all duration-300;
+}
+
+.cyber-card:hover {
+  @apply border-cyber-cyan/50;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+}
+
+/* Section headings */
+.section-heading {
+  @apply text-3xl md:text-4xl font-display font-bold mb-8;
+  @apply bg-gradient-to-r from-cyber-cyan to-cyber-magenta bg-clip-text text-transparent;
+}
+
+/* Animated underline */
+.animated-underline {
+  @apply relative;
+}
+
+.animated-underline::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-cyber-cyan;
+  @apply transition-all duration-300;
+}
+
+.animated-underline:hover::after {
+  @apply w-full;
+}
