@@ -22,9 +22,11 @@ export const aboutData = {
   bio: `My name is Yegor Lushpin, I am an Electrical Engineering student at the University of Cincinnati with hands-on experience in high-voltage battery systems, iOS development, and scientific computing.
   I have contributed to a NASA-supported citizen science app for photographing solar eclipses and am currently supporting the design and integration of high-voltage battery systems for a Formula SAE electric race car. 
   
-  I am passionate about embedded systems, battery technology, and iOS development. However I am most eager about making a change in this world, my dream job is in Renewable and Clean Energy Systems. 
+  I am passionate about embedded systems, battery technology, and solving problems in general. However I am most eager about making a change in this world, my dream job is in Renewable and Clean Energy Systems. 
+
+  I am eager to apply my skills in a co-op position starting Fall 2026.
   
-  I am eager to apply my skills in a co-op position starting Fall 2026.`,
+  I also love my dog, Gosha, he is a 2 year old squishy pug and he is the best. P.S. there is an easter egg somewhere on my page about him, can you find it?`,
   specialties: [
     "Battery Systems & HV Safety",
     "iOS Development (Swift)",

@@ -45,14 +45,14 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative aspect-square max-w-lg mx-auto">
+            <div className="relative aspect-[3/4] w-full max-w-md mx-auto">
               {/* Profile image */}
               <div className="absolute inset-0 rounded-sm border border-cyber-yellow/30 overflow-hidden">
                 <Image
                   src="/images/lushpiev@mail.uc.edu-1.jpg"
                   alt="Yegor Lushpin"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                   priority
                 />
                 {/* Overlay gradient */}

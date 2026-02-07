@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Mail, MapPin, Clock, Github, Linkedin, Phone } from 'lucide-react'
+import { Mail, MapPin, Clock, Github, Linkedin, Phone, Dog } from 'lucide-react'
+import Link from 'next/link'
 import { siteConfig } from '@/lib/data'
 
 export default function Contact() {
@@ -125,6 +126,17 @@ export default function Contact() {
                   <social.icon size={20} />
                 </motion.a>
               ))}
+              {/* Easter egg */}
+              <Link href="/gosha">
+                <motion.div
+                  className="w-8 h-8 flex items-center justify-center border border-gray-700/50 text-gray-600 hover:text-cyber-yellow hover:border-cyber-yellow/30 transition-all duration-300 opacity-40 hover:opacity-100"
+                  whileHover={{ scale: 1.1, y: -3 }}
+                  whileTap={{ scale: 0.9 }}
+                  aria-label="Easter egg"
+                >
+                  <Dog size={14} />
+                </motion.div>
+              </Link>
             </div>
           </div>
         </motion.div>
