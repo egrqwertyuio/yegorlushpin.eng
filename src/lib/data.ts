@@ -12,7 +12,7 @@ export const siteConfig = {
   availability: "Available for 1st Co-op Fall 2026 and 2nd Co-op Summer 2027",
   social: {
     linkedin: "https://www.linkedin.com/in/yegorlushpin",
-    github: "https://github.com/yegorlushpin",
+    github: "https://github.com/egrqwertyuio",
     twitter: "",
   },
   resumeUrl: "/resume.pdf",

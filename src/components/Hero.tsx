@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Mail, FileText, ChevronRight } from 'lucide-react'
 import { siteConfig } from '@/lib/data'
 
-const CubesBackground = dynamic(() => import('./CubesBackground'), {
+const MagnetLines = dynamic(() => import('./MagnetLines'), {
   ssr: false,
   loading: () => null,
 })
@@ -13,19 +13,16 @@ const CubesBackground = dynamic(() => import('./CubesBackground'), {
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#060010]">
-      {/* Cubes background */}
-      <div className="absolute inset-0 p-4 md:p-8">
-        <CubesBackground
-          gridSize={13}
-          maxAngle={45}
-          radius={3}
-          borderStyle="1px dashed rgba(255, 215, 0, 0.4)"
-          faceColor="rgba(10, 10, 20, 0.8)"
-          rippleColor="#FFD700"
-          rippleSpeed={2}
-          autoAnimate={true}
-          rippleOnClick={true}
-          shadow={true}
+      {/* MagnetLines background */}
+      <div className="absolute inset-0 opacity-70">
+        <MagnetLines
+          rows={12}
+          columns={20}
+          lineColor="#FFD700"
+          lineWidth="3px"
+          lineHeight="70px"
+          baseAngle={-45}
+          className="w-full h-full"
         />
       </div>
 
