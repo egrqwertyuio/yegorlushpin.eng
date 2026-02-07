@@ -29,7 +29,7 @@ export default function Hero() {
       </div>
 
       {/* Desktop background - MagnetLines */}
-      <div className="absolute inset-0 opacity-70 hidden md:block">
+      <div className="absolute inset-0 opacity-30 hidden md:block">
         <MagnetLines
           rows={12}
           columns={20}
