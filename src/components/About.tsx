@@ -85,7 +85,7 @@ export default function About() {
             className="space-y-6"
           >
             <div className="prose prose-invert">
-              <p className="text-gray-300 text-lg leading-relaxed whitespace-pre-line">
+              <p className="text-gray-300 text-base leading-relaxed whitespace-pre-line">
                 {aboutData.bio}
               </p>
             </div>

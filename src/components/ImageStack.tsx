@@ -130,9 +130,9 @@ export default function ImageStack({ items, title }: ImageStackProps) {
               e.stopPropagation()
               setSelectedIndex(null)
             }}
-            className="absolute top-6 right-6 w-14 h-14 md:w-10 md:h-10 bg-cyber-yellow text-cyber-bg font-bold flex items-center justify-center hover:bg-cyber-yellow-bright transition-colors z-[10000] shadow-xl rounded-sm"
+            className="absolute top-20 right-6 p-2 text-cyber-yellow hover:text-cyber-yellow-bright transition-colors z-[10000]"
           >
-            <X size={28} className="md:w-5 md:h-5" />
+            <X size={40} strokeWidth={3} />
           </button>
 
           {items.length > 1 && (
