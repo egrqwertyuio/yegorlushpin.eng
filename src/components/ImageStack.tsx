@@ -126,10 +126,13 @@ export default function ImageStack({ items, title }: ImageStackProps) {
           onClick={() => setSelectedIndex(null)}
         >
           <button
-            onClick={() => setSelectedIndex(null)}
-            className="absolute top-4 right-4 w-10 h-10 bg-cyber-bg border border-cyber-yellow text-cyber-yellow flex items-center justify-center hover:bg-cyber-yellow hover:text-cyber-bg transition-colors z-50"
+            onClick={(e) => {
+              e.stopPropagation()
+              setSelectedIndex(null)
+            }}
+            className="absolute top-4 right-4 w-12 h-12 md:w-10 md:h-10 bg-cyber-bg/95 border-2 border-cyber-yellow text-cyber-yellow flex items-center justify-center hover:bg-cyber-yellow hover:text-cyber-bg transition-colors z-[10000] shadow-lg"
           >
-            <X size={20} />
+            <X size={24} className="md:w-5 md:h-5" />
           </button>
 
           {items.length > 1 && (
