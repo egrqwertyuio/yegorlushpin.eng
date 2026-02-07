@@ -3,6 +3,7 @@ import './globals.css'
 import { siteConfig } from '@/lib/data'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { Analytics } from '@vercel/analytics/next'
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} | ${siteConfig.title}`,
@@ -30,6 +31,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   )
