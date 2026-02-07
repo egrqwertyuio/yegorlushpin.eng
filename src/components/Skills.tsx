@@ -3,33 +3,22 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
+import dynamic from 'next/dynamic'
 import { Cpu, Code, Wrench, Terminal } from 'lucide-react'
 import { skillsData } from '@/lib/data'
+import SpotlightCard from './SpotlightCard'
+
+const MetaBalls = dynamic(() => import('./MetaBalls'), {
+  ssr: false,
+  loading: () => null,
+})
 
 const categories = [
   { id: 'hardware', name: 'Hardware', icon: Cpu, data: skillsData.hardware },
-  { id: 'embedded', name: 'Embedded', icon: Code, data: skillsData.embedded },
+  { id: 'embedded', name: 'Languages', icon: Code, data: skillsData.embedded },
   { id: 'tools', name: 'Tools', icon: Wrench, data: skillsData.tools },
   { id: 'software', name: 'Software', icon: Terminal, data: skillsData.software },
 ]
-
-// Convert level to proficiency label
-function getProficiencyLabel(level: number): string {
-  if (level >= 90) return 'Expert'
-  if (level >= 80) return 'Advanced'
-  if (level >= 70) return 'Proficient'
-  if (level >= 60) return 'Intermediate'
-  return 'Learning'
-}
-
-// Get number of filled segments (out of 5)
-function getFilledSegments(level: number): number {
-  if (level >= 90) return 5
-  if (level >= 80) return 4
-  if (level >= 70) return 3
-  if (level >= 60) return 2
-  return 1
-}
 
 export default function Skills() {
   const ref = useRef(null)
@@ -39,11 +28,24 @@ export default function Skills() {
   const activeData = categories.find(c => c.id === activeCategory)?.data || []
 
   return (
-    <section id="skills" className="py-20 relative bg-cyber-bg-light" ref={ref}>
-      {/* Background pattern */}
-      <div className="absolute inset-0 circuit-bg opacity-30" />
+    <section id="skills" className="py-20 relative bg-cyber-bg-light overflow-hidden" ref={ref}>
+      {/* MetaBalls Background */}
+      <div className="absolute inset-0 opacity-40">
+        <MetaBalls
+          color="#FFD700"
+          cursorBallColor="#FF8C00"
+          speed={0.3}
+          enableMouseInteraction={true}
+          hoverSmoothness={0.05}
+          animationSize={30}
+          ballCount={12}
+          clumpFactor={1.2}
+          cursorBallSize={2}
+          enableTransparency={true}
+        />
+      </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -87,77 +89,30 @@ export default function Skills() {
           ))}
         </motion.div>
 
-        {/* Skills Grid */}
+        {/* Skills Grid - 3 columns x 2 rows */}
         <motion.div
           key={activeCategory}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto"
         >
-          {activeData.map((skill, index) => {
-            const filledSegments = getFilledSegments(skill.level)
-            const proficiency = getProficiencyLabel(skill.level)
-
-            return (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.1 * index }}
-                className="cyber-card p-6 group"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-white font-semibold group-hover:text-cyber-yellow transition-colors">
+          {activeData.slice(0, 6).map((skill, index) => (
+            <motion.div
+              key={skill.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.05 * index }}
+            >
+              <SpotlightCard className="h-full">
+                <div className="p-5 text-center">
+                  <h3 className="text-white font-semibold text-sm md:text-base">
                     {skill.name}
                   </h3>
-                  <span className="text-xs font-mono text-gray-500 uppercase tracking-wider">
-                    {proficiency}
-                  </span>
                 </div>
-
-                {/* Segmented Progress Bar */}
-                <div className="flex gap-1.5">
-                  {[1, 2, 3, 4, 5].map((segment) => (
-                    <motion.div
-                      key={segment}
-                      className="relative h-2 flex-1 bg-cyber-bg rounded-sm overflow-hidden"
-                      initial={{ opacity: 0.3 }}
-                      animate={isInView ? { opacity: 1 } : {}}
-                      transition={{ duration: 0.3, delay: 0.1 * index + segment * 0.05 }}
-                    >
-                      <motion.div
-                        className={`absolute inset-0 ${
-                          segment <= filledSegments
-                            ? 'bg-gradient-to-r from-cyber-yellow to-cyber-orange'
-                            : 'bg-gray-800'
-                        }`}
-                        initial={{ scaleX: 0 }}
-                        animate={isInView ? { scaleX: 1 } : {}}
-                        transition={{
-                          duration: 0.4,
-                          delay: 0.2 + index * 0.1 + segment * 0.08,
-                          ease: "easeOut"
-                        }}
-                        style={{ transformOrigin: 'left' }}
-                      />
-                      {/* Glow effect on filled segments */}
-                      {segment <= filledSegments && (
-                        <motion.div
-                          className="absolute inset-0 bg-cyber-yellow/20"
-                          animate={{ opacity: [0.2, 0.5, 0.2] }}
-                          transition={{ duration: 2, repeat: Infinity, delay: segment * 0.2 }}
-                        />
-                      )}
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Circuit decoration */}
-                <div className="absolute top-2 right-2 w-2 h-2 bg-cyber-yellow/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-              </motion.div>
-            )
-          })}
+              </SpotlightCard>
+            </motion.div>
+          ))}
         </motion.div>
 
         {/* Additional Skills Text */}
