@@ -19,9 +19,11 @@ export const siteConfig = {
 };
 
 export const aboutData = {
-  bio: `I'm an Electrical Engineering student at the University of Cincinnati with hands-on experience in high-voltage battery systems, iOS development, and scientific computing.
-
-My work spans from designing temperature monitoring systems for Formula SAE electric race cars to developing NASA-supported citizen science applications. I thrive in collaborative environments where I can apply my technical skills to solve real-world engineering challenges.`,
+  bio: `My name is Yegor Lushpin, I am an Electrical Engineering student at the University of Cincinnati with hands-on experience in high-voltage battery systems, iOS development, and scientific computing.
+  I have contributed to a NASA-supported citizen science app for photographing solar eclipses and am currently supporting the design and integration of high-voltage battery systems for a Formula SAE electric race car. 
+  
+  I am passionate about embedded systems, battery technology, and iOS development. However I am most eager about making a change in this world, my dream job is in Renewable and Clean Energy Systems. 
+  I am eager to apply my skills in a co-op position starting Fall 2026.`,
   specialties: [
     "Battery Systems & HV Safety",
     "iOS Development (Swift)",
@@ -51,35 +53,35 @@ My work spans from designing temperature monitoring systems for Formula SAE elec
 
 export const skillsData = {
   hardware: [
-    { name: "Oscilloscope", level: 90 },
-    { name: "Multimeter", level: 95 },
-    { name: "Soldering", level: 85 },
-    { name: "KiCad", level: 75 },
-    { name: "Battery Systems", level: 80 },
-    { name: "HV Safety", level: 80 },
+    { name: "Oscilloscope", level: 50 },
+    { name: "Multimeter", level: 70 },
+    { name: "Soldering", level: 80 },
+    { name: "KiCad", level: 60 },
+    { name: "Battery Systems", level: 60 },
+    { name: "HV Safety", level: 60 },
   ],
   embedded: [
     { name: "C/C++", level: 80 },
-    { name: "Python", level: 85 },
-    { name: "Java", level: 80 },
-    { name: "Swift", level: 75 },
+    { name: "Python", level: 90 },
+    { name: "Java", level: 90 },
+    { name: "Swift", level: 70 },
     { name: "MATLAB", level: 85 },
     { name: "LabVIEW", level: 70 },
   ],
   tools: [
-    { name: "Visual Studio Code", level: 90 },
-    { name: "Git", level: 85 },
-    { name: "Linux", level: 80 },
+    { name: "Visual Studio Code", level: 100 },
+    { name: "Git", level: 80 },
+    { name: "Linux", level: 60 },
     { name: "Microsoft Office", level: 95 },
-    { name: "KiCad", level: 75 },
-    { name: "MATLAB/Simulink", level: 85 },
+    { name: "Seimens NX", level: 75 },
+    { name: "Simulink", level: 80 },
   ],
   software: [
-    { name: "Python", level: 85 },
+    { name: "Python", level: 90 },
     { name: "Git", level: 85 },
-    { name: "Linux", level: 80 },
-    { name: "Swift (iOS)", level: 75 },
-    { name: "Java", level: 80 },
+    { name: "Linux", level: 60 },
+    { name: "Swift (iOS)", level: 70 },
+    { name: "Java", level: 90 },
     { name: "C/C++", level: 80 },
   ],
 };

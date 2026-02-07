@@ -13,6 +13,24 @@ const categories = [
   { id: 'software', name: 'Software', icon: Terminal, data: skillsData.software },
 ]
 
+// Convert level to proficiency label
+function getProficiencyLabel(level: number): string {
+  if (level >= 90) return 'Expert'
+  if (level >= 80) return 'Advanced'
+  if (level >= 70) return 'Proficient'
+  if (level >= 60) return 'Intermediate'
+  return 'Learning'
+}
+
+// Get number of filled segments (out of 5)
+function getFilledSegments(level: number): number {
+  if (level >= 90) return 5
+  if (level >= 80) return 4
+  if (level >= 70) return 3
+  if (level >= 60) return 2
+  return 1
+}
+
 export default function Skills() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
@@ -77,50 +95,69 @@ export default function Skills() {
           transition={{ duration: 0.3 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {activeData.map((skill, index) => (
-            <motion.div
-              key={skill.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.1 * index }}
-              className="cyber-card p-6 group"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-white font-semibold group-hover:text-cyber-yellow transition-colors">
-                  {skill.name}
-                </h3>
-                <span className="text-cyber-yellow font-mono text-sm">
-                  {skill.level}%
-                </span>
-              </div>
+          {activeData.map((skill, index) => {
+            const filledSegments = getFilledSegments(skill.level)
+            const proficiency = getProficiencyLabel(skill.level)
 
-              {/* Progress Bar */}
-              <div className="relative h-2 bg-cyber-bg rounded-sm overflow-hidden">
-                <motion.div
-                  className="absolute top-0 left-0 h-full bg-gradient-to-r from-cyber-yellow to-cyber-orange"
-                  initial={{ width: 0 }}
-                  animate={isInView ? { width: `${skill.level}%` } : {}}
-                  transition={{ duration: 1, delay: 0.2 + index * 0.1, ease: "easeOut" }}
-                />
-                {/* Animated glow effect */}
-                <motion.div
-                  className="absolute top-0 left-0 h-full w-4 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                  animate={{
-                    x: [-20, 300],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: index * 0.2,
-                    ease: "linear",
-                  }}
-                />
-              </div>
+            return (
+              <motion.div
+                key={skill.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.1 * index }}
+                className="cyber-card p-6 group"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-white font-semibold group-hover:text-cyber-yellow transition-colors">
+                    {skill.name}
+                  </h3>
+                  <span className="text-xs font-mono text-gray-500 uppercase tracking-wider">
+                    {proficiency}
+                  </span>
+                </div>
 
-              {/* Circuit decoration */}
-              <div className="absolute top-2 right-2 w-2 h-2 bg-cyber-yellow/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-            </motion.div>
-          ))}
+                {/* Segmented Progress Bar */}
+                <div className="flex gap-1.5">
+                  {[1, 2, 3, 4, 5].map((segment) => (
+                    <motion.div
+                      key={segment}
+                      className="relative h-2 flex-1 bg-cyber-bg rounded-sm overflow-hidden"
+                      initial={{ opacity: 0.3 }}
+                      animate={isInView ? { opacity: 1 } : {}}
+                      transition={{ duration: 0.3, delay: 0.1 * index + segment * 0.05 }}
+                    >
+                      <motion.div
+                        className={`absolute inset-0 ${
+                          segment <= filledSegments
+                            ? 'bg-gradient-to-r from-cyber-yellow to-cyber-orange'
+                            : 'bg-gray-800'
+                        }`}
+                        initial={{ scaleX: 0 }}
+                        animate={isInView ? { scaleX: 1 } : {}}
+                        transition={{
+                          duration: 0.4,
+                          delay: 0.2 + index * 0.1 + segment * 0.08,
+                          ease: "easeOut"
+                        }}
+                        style={{ transformOrigin: 'left' }}
+                      />
+                      {/* Glow effect on filled segments */}
+                      {segment <= filledSegments && (
+                        <motion.div
+                          className="absolute inset-0 bg-cyber-yellow/20"
+                          animate={{ opacity: [0.2, 0.5, 0.2] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: segment * 0.2 }}
+                        />
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Circuit decoration */}
+                <div className="absolute top-2 right-2 w-2 h-2 bg-cyber-yellow/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+              </motion.div>
+            )
+          })}
         </motion.div>
 
         {/* Additional Skills Text */}

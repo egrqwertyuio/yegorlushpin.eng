@@ -45,7 +45,7 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative aspect-square max-w-md mx-auto">
+            <div className="relative aspect-square max-w-lg mx-auto">
               {/* Profile image */}
               <div className="absolute inset-0 rounded-sm border border-cyber-yellow/30 overflow-hidden">
                 <Image
