@@ -13,8 +13,23 @@ const MagnetLines = dynamic(() => import('./MagnetLines'), {
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#060010]">
-      {/* MagnetLines background */}
-      <div className="absolute inset-0 opacity-70">
+      {/* Mobile background - simple animated gradient */}
+      <div className="absolute inset-0 md:hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-cyber-yellow/5 via-transparent to-cyber-orange/5" />
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyber-yellow/10 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 4, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-cyber-orange/10 rounded-full blur-3xl"
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.5, 0.3, 0.5] }}
+          transition={{ duration: 4, repeat: Infinity }}
+        />
+      </div>
+
+      {/* Desktop background - MagnetLines */}
+      <div className="absolute inset-0 opacity-70 hidden md:block">
         <MagnetLines
           rows={12}
           columns={20}

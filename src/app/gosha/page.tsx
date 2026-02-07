@@ -63,6 +63,8 @@ export default function GoshaPage() {
           className="text-center text-gray-500 text-sm font-mono mt-8"
         >
           You found the easter egg!
+          
+          please contact me if you want to know more about Gosha, I can tell you all about him and show you more pictures, he is the best dog in the world and I love him so much!
         </motion.p>
       </div>
     </div>
