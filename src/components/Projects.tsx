@@ -96,6 +96,13 @@ export default function Projects() {
                     </div>
                   )}
 
+                  {/* In Progress badge */}
+                  {(project as { inProgress?: boolean }).inProgress && (
+                    <div className="absolute top-6 right-6 px-2 py-1 bg-purple-500/90 border border-purple-400 text-white text-xs font-mono z-50">
+                      In Progress
+                    </div>
+                  )}
+
                   {/* Category badge */}
                   <div className="absolute top-6 left-6 px-2 py-1 bg-cyber-yellow/90 border border-cyber-yellow text-cyber-bg text-xs font-mono z-50">
                     {project.category}
@@ -174,7 +181,7 @@ export default function Projects() {
           className="mt-12 text-center"
         >
           <motion.a
-            href="https://github.com/yegorlushpin"
+            href="https://github.com/egrqwertyuio"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-cyber-yellow hover:text-cyber-orange transition-colors font-mono"
