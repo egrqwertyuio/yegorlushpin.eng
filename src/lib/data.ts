@@ -23,6 +23,7 @@ export const aboutData = {
   I have contributed to a NASA-supported citizen science app for photographing solar eclipses and am currently supporting the design and integration of high-voltage battery systems for a Formula SAE electric race car. 
   
   I am passionate about embedded systems, battery technology, and iOS development. However I am most eager about making a change in this world, my dream job is in Renewable and Clean Energy Systems. 
+  
   I am eager to apply my skills in a co-op position starting Fall 2026.`,
   specialties: [
     "Battery Systems & HV Safety",
