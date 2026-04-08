@@ -3,9 +3,10 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { ExternalLink, Github, ChevronRight } from 'lucide-react'
+import { ExternalLink, Github, ChevronRight, FileText } from 'lucide-react'
 import { projectsData } from '@/lib/data'
 import ImageStack from './ImageStack'
+import ProjectDetails, { type ProjectDetailsData } from './ProjectDetails'
 
 const categories = ['All', 'Hardware', 'Software', 'Personal']
 
@@ -13,6 +14,7 @@ export default function Projects() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [filter, setFilter] = useState('All')
+  const [detailsProject, setDetailsProject] = useState<{ title: string; details: ProjectDetailsData } | null>(null)
 
   const filteredProjects = filter === 'All'
     ? projectsData
@@ -159,6 +161,18 @@ export default function Projects() {
                         <span>Demo</span>
                       </a>
                     )}
+                    {(project as { details?: ProjectDetailsData }).details && (
+                      <button
+                        onClick={() => setDetailsProject({
+                          title: project.title,
+                          details: (project as { details: ProjectDetailsData }).details,
+                        })}
+                        className="flex items-center gap-1 text-sm text-gray-400 hover:text-cyber-yellow transition-colors"
+                      >
+                        <FileText size={16} />
+                        <span>Details</span>
+                      </button>
+                    )}
                     <motion.span
                       className="ml-auto text-cyber-yellow/50 group-hover:text-cyber-yellow transition-colors"
                       animate={{ x: [0, 5, 0] }}
@@ -192,6 +206,15 @@ export default function Projects() {
           </motion.a>
         </motion.div>
       </div>
+
+      {/* Project Details Drawer */}
+      {detailsProject && (
+        <ProjectDetails
+          title={detailsProject.title}
+          details={detailsProject.details}
+          onClose={() => setDetailsProject(null)}
+        />
+      )}
     </section>
   )
 }
