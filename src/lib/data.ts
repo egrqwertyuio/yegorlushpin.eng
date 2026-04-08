@@ -4,12 +4,12 @@
 export const siteConfig = {
   name: "Yegor Lushpin",
   title: "Electrical Engineering Student",
-  subtitle: "University of Cincinnati | Co-op Available",
-  description: "Electrical Engineering student passionate about embedded systems, battery technology, and iOS development. Available for 1st Co-op Fall 2026 and 2nd Co-op Summer 2027.",
+  subtitle: "University of Cincinnati | TREW Automation Co-op '26",
+  description: "Electrical Engineering student passionate about embedded systems, battery technology, and renewable energy. Accepted 1st Co-op at TREW Automation (Fall 2026) | Seeking 2nd Co-op Summer 2027.",
   email: "lushpiev@mail.uc.edu",
   phone: "(859) 786-2491",
   location: "Cincinnati, Ohio",
-  availability: "Available for 1st Co-op Fall 2026 and 2nd Co-op Summer 2027",
+  availability: "1st Co-op: TREW Automation, Fall 2026 | Seeking 2nd Co-op Summer 2027",
   social: {
     linkedin: "https://www.linkedin.com/in/yegorlushpin",
     github: "https://github.com/egrqwertyuio",
@@ -24,7 +24,7 @@ export const aboutData = {
   
   I am passionate about embedded systems, battery technology, and solving problems in general. However I am most passionate about making a change in this world, my dream job is in Renewable and Clean Energy Systems and adjacent industries. 
 
-  I am eager to apply my skills in a co-op position starting Fall 2026.
+  I have accepted my 1st co-op position at TREW Automation in West Chester, OH starting Fall 2026, focused on electrical drawings and design. I am actively seeking a 2nd co-op for Summer 2027.
   
   I also love my dog, Gosha, he is a 2 years old squishy pug and he is the best. P.S. there is an easter egg somewhere on my page about him, can you find it?`,
   specialties: [
@@ -227,9 +227,71 @@ export const projectsData = [
     demo: "",
     featured: false,
   },
+  {
+    id: 9,
+    title: "PMR Robot — CEAS Expo 1st Place",
+    description: "ENED 1002c Prototype Mover Robot built with LEGO Mindstorms EV3. Autonomous line-following and weight detection system for delivery tasks. Team 09.08 won 1st Place at the CEAS Expo 2026.",
+    image: "",
+    gallery: [],
+    technologies: ["LEGO Mindstorms EV3", "LabVIEW", "Robotics", "Autonomous Systems"],
+    category: "Hardware",
+    github: "",
+    demo: "",
+    featured: true,
+  },
+  {
+    id: 10,
+    title: "Off-Grid Encrypted Pager",
+    description: "DIY long-range encrypted messaging system using ESP32 and LoRa radio — designed to communicate privately over 35 miles between Northern Kentucky and Cincinnati without cellular or internet infrastructure. AES-256 / ChaCha20-Poly1305 encryption with no licensing requirements.",
+    image: "",
+    gallery: [],
+    technologies: ["ESP32", "LoRa", "AES-256", "Meshtastic", "RF Communication"],
+    category: "Personal",
+    github: "",
+    demo: "",
+    featured: false,
+    inProgress: true,
+  },
+  {
+    id: 11,
+    title: "ESP32-CAM Smart Flower Pot",
+    description: "IoT birthday gift for my girlfriend — an ESP32-CAM flower pot that detects her face, lights up LEDs, and displays custom messages on an LCD. Remote access via MQTT over HiveMQ Cloud with a Next.js web dashboard for uploading messages and monitoring the camera.",
+    image: "",
+    gallery: [],
+    technologies: ["ESP32-CAM", "ESP32-C3", "MQTT", "Next.js", "Face Detection", "LabVIEW"],
+    category: "Personal",
+    github: "",
+    demo: "",
+    featured: false,
+  },
+  {
+    id: 12,
+    title: "Consistency Dashboard",
+    description: "Custom habit-tracking spreadsheet built in Google Sheets with a dark cyberpunk theme. Tracks 10 daily habits with streaks, per-habit averages, inline bar indicators, and 5 chart types per month. Built iteratively through 4 versions with 1,022 formulas and zero errors.",
+    image: "",
+    gallery: [],
+    technologies: ["Google Sheets", "Data Visualization", "Productivity"],
+    category: "Software",
+    github: "",
+    demo: "",
+    featured: false,
+  },
 ];
 
 export const experienceData = [
+  {
+    id: 0,
+    title: "Electrical Engineering Co-op",
+    company: "TREW Automation",
+    location: "West Chester, Ohio",
+    period: "Aug 2026 - Dec 2026",
+    description: "Accepted 1st co-op position focused on electrical drawings and design at an automation and controls engineering firm.",
+    achievements: [
+      "Accepted offer — starting Fall 2026",
+      "Focus: electrical drawings, designs, and automation systems",
+    ],
+    upcoming: true,
+  },
   {
     id: 1,
     title: "Electrical Engineering Team Member",
@@ -238,6 +300,7 @@ export const experienceData = [
     period: "Aug 2025 - Present",
     description: "Supporting the design and integration of high-voltage battery systems for a Formula SAE electric race car.",
     achievements: [
+      "Won 1st Place (Student Organization category) at CEAS Expo 2026, presented by Marmon Holdings",
       "Designed temperature monitoring system for battery cell thermal validation",
       "Drafted busbar and fusible link drawings for overcurrent protection",
       "Validated fusible link dimensions using oscilloscope measurements",

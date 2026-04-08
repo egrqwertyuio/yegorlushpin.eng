@@ -70,9 +70,14 @@ export default function Experience() {
                 `}>
                   <div className="cyber-card p-6 group">
                     {/* Period badge */}
-                    <div className={`flex items-center gap-2 mb-4 ${isLeft ? 'md:justify-end' : ''}`}>
+                    <div className={`flex items-center gap-2 mb-4 flex-wrap ${isLeft ? 'md:justify-end' : ''}`}>
                       <Calendar className="w-4 h-4 text-cyber-yellow" />
                       <span className="text-cyber-yellow font-mono text-sm">{exp.period}</span>
+                      {(exp as { upcoming?: boolean }).upcoming && (
+                        <span className="px-2 py-0.5 bg-cyber-yellow/20 border border-cyber-yellow text-cyber-yellow text-xs font-mono">
+                          Accepted
+                        </span>
+                      )}
                     </div>
 
                     {/* Title */}
