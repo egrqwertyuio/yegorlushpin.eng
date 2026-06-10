@@ -3,7 +3,14 @@
     "allow": [
       "Bash(dir:*)",
       "Bash(New-Item *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(Select-Object FullName)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\egorl\\\\OneDrive\\\\Documents\\\\GitHub\\\\yegorlushpin.eng\\\\public\\\\images\\\\projects\\\\BearcatsEV\" -Recurse | ForEach-Object { $_.FullName })",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\egorl\\\\OneDrive\\\\Documents\\\\GitHub\\\\BER_Dash\" -ErrorAction SilentlyContinue | Select-Object Name, LastWriteTime; if \\(-not \\(Test-Path \"C:\\\\Users\\\\egorl\\\\OneDrive\\\\Documents\\\\GitHub\\\\BER_Dash\"\\)\\) { \"PATH NOT FOUND\" })",
+      "PowerShell(Get-Item *)",
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(\\(Get-ChildItem \"C:\\\\Users\\\\egorl\\\\OneDrive - University of Cincinnati\\\\Bearcats Electric Racing - Documents\\\\General\\\\EV 4 \\(2025-2026\\)\\\\Electronics\" -Recurse -File -ErrorAction SilentlyContinue\\) | Select-Object Name, LastWriteTime | Sort-Object LastWriteTime -Descending | Select-Object -First 40)",
+      "PowerShell(Read-Host *)"
     ]
   }
 }

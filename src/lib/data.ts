@@ -421,6 +421,7 @@ export const experienceData = [
     description: "Supporting the design and integration of high-voltage battery systems for a Formula SAE electric race car.",
     achievements: [
       "Won 1st Place (Student Organization category) at CEAS Expo 2026, presented by Marmon Holdings",
+      "Completed EV4 CAN DAQ system — Raspberry Pi with CAN HAT reads live frames from can0 at 500 kbps, decodes signals via DBC files using cantools, logs timestamped CSVs, streams batched data to InfluxDB Cloud, and visualizes live telemetry in Grafana dashboards",
       "Designed temperature monitoring system for battery cell thermal validation",
       "Drafted busbar and fusible link drawings for overcurrent protection",
       "Validated fusible link dimensions using oscilloscope measurements",
