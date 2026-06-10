@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(dir:*)",
-      "Bash(New-Item *)"
+      "Bash(New-Item *)",
+      "Bash(npm run *)"
     ]
   }
 }
