@@ -64,7 +64,7 @@ export default function Hero() {
           >
             <span className="text-white">{siteConfig.name.split(' ')[0]}</span>
             <br />
-            <span className="bg-gradient-to-r from-cyber-yellow via-cyber-orange to-cyber-yellow bg-clip-text text-transparent">
+            <span className="text-cyber-yellow">
               {siteConfig.name.split(' ')[1]}
             </span>
           </motion.h1>

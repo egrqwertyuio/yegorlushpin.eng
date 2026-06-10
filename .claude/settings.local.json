@@ -10,7 +10,9 @@
       "PowerShell(Get-Item *)",
       "PowerShell(Get-ChildItem *)",
       "PowerShell(\\(Get-ChildItem \"C:\\\\Users\\\\egorl\\\\OneDrive - University of Cincinnati\\\\Bearcats Electric Racing - Documents\\\\General\\\\EV 4 \\(2025-2026\\)\\\\Electronics\" -Recurse -File -ErrorAction SilentlyContinue\\) | Select-Object Name, LastWriteTime | Sort-Object LastWriteTime -Descending | Select-Object -First 40)",
-      "PowerShell(Read-Host *)"
+      "PowerShell(Read-Host *)",
+      "Bash(npm install *)",
+      "Bash(NODE_TLS_REJECT_UNAUTHORIZED=0 npm install resend)"
     ]
   }
 }
