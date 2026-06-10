@@ -12,7 +12,16 @@
       "PowerShell(\\(Get-ChildItem \"C:\\\\Users\\\\egorl\\\\OneDrive - University of Cincinnati\\\\Bearcats Electric Racing - Documents\\\\General\\\\EV 4 \\(2025-2026\\)\\\\Electronics\" -Recurse -File -ErrorAction SilentlyContinue\\) | Select-Object Name, LastWriteTime | Sort-Object LastWriteTime -Descending | Select-Object -First 40)",
       "PowerShell(Read-Host *)",
       "Bash(npm install *)",
-      "Bash(NODE_TLS_REJECT_UNAUTHORIZED=0 npm install resend)"
+      "Bash(NODE_TLS_REJECT_UNAUTHORIZED=0 npm install resend)",
+      "WebFetch(domain:www.reactbits.dev)",
+      "WebFetch(domain:reactbits.dev)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl -s \"https://api.github.com/repos/DavidHDev/react-bits/git/trees/main?recursive=1\")",
+      "Bash(python -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(f['path']\\) for f in data.get\\('tree',[]\\) if 'component' in f['path'].lower\\(\\) or 'src/content' in f['path'].lower\\(\\)]\")",
+      "Bash(gh api *)",
+      "Bash(gh repo *)",
+      "PowerShell(gh api *)",
+      "WebFetch(domain:github.com)"
     ]
   }
 }
