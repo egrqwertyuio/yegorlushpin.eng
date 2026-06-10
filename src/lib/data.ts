@@ -476,14 +476,7 @@ export const testimonialsData: {
   comment: string;
   date: string;
 }[] = [
-  {
-    id: 1,
-    name: "curious_george2008",
-    relationship: "Teammate",
-    rating: 5,
-    comment: "goat",
-    date: "2026-06",
-  },
+  // Add approved submissions here
 ];
 
 export const navLinks = [
