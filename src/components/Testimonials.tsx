@@ -1,9 +1,133 @@
 'use client'
 
-import React, { useState, useRef } from 'react'
+import React, {
+  useState, useRef, useEffect, useMemo, useImperativeHandle,
+  Children, cloneElement, isValidElement,
+  forwardRef, createRef,
+  type ReactElement,
+} from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Star, Send, CheckCircle, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, Quote } from 'lucide-react'
+import { Star, Send, CheckCircle, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react'
+import gsap from 'gsap'
 import { testimonialsData } from '@/lib/data'
+
+// ── CardSwap (inlined from react-bits, adapted for manual prev/next control) ──
+
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  customClass?: string
+}
+
+const Card = forwardRef<HTMLDivElement, CardProps>(({ customClass, style, ...rest }, ref) => (
+  <div
+    ref={ref}
+    {...rest}
+    style={{
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      borderRadius: '2px',
+      border: '1px solid rgba(255,255,255,0.2)',
+      background: '#0a0a0a',
+      transformStyle: 'preserve-3d',
+      willChange: 'transform',
+      backfaceVisibility: 'hidden',
+      ...style,
+    }}
+    className={`${customClass ?? ''} ${rest.className ?? ''}`}
+  />
+))
+Card.displayName = 'Card'
+
+interface CardSwapHandle {
+  next: () => void
+  prev: () => void
+}
+
+interface CardSwapProps {
+  width?: number
+  height?: number
+  cardDistance?: number
+  verticalDistance?: number
+  skewAmount?: number
+  easing?: 'elastic' | 'power'
+  children: React.ReactNode
+}
+
+const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap({
+  width = 340,
+  height = 220,
+  cardDistance = 50,
+  verticalDistance = 55,
+  skewAmount = 4,
+  easing = 'elastic',
+  children,
+}, handleRef) {
+  const config =
+    easing === 'elastic'
+      ? { ease: 'elastic.out(0.7,0.9)', dur: 0.7 }
+      : { ease: 'power2.inOut', dur: 0.5 }
+
+  const childArr = useMemo(() => Children.toArray(children), [children])
+  const refs = useMemo(() => childArr.map(() => createRef<HTMLDivElement>()), [childArr.length])
+  const order = useRef(Array.from({ length: childArr.length }, (_, i) => i))
+  const animating = useRef(false)
+  const container = useRef<HTMLDivElement>(null)
+
+  const makeSlot = (i: number) => ({
+    x: i * cardDistance,
+    y: -i * verticalDistance,
+    z: -i * cardDistance * 1.5,
+    zIndex: childArr.length - i,
+  })
+
+  const placeNow = (el: HTMLDivElement, slot: ReturnType<typeof makeSlot>) =>
+    gsap.set(el, { x: slot.x, y: slot.y, z: slot.z, xPercent: -50, yPercent: -50, skewY: skewAmount, transformOrigin: 'center center', zIndex: slot.zIndex, force3D: true })
+
+  useEffect(() => {
+    order.current = Array.from({ length: childArr.length }, (_, i) => i)
+    refs.forEach((r, i) => { if (r.current) placeNow(r.current, makeSlot(i)) })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refs.length])
+
+  const goTo = (direction: 1 | -1) => {
+    if (childArr.length < 2 || animating.current) return
+    animating.current = true
+
+    order.current = direction === 1
+      ? [...order.current.slice(1), order.current[0]]
+      : [order.current[order.current.length - 1], ...order.current.slice(0, -1)]
+
+    let pending = order.current.length
+    order.current.forEach((cardIdx, slotIdx) => {
+      const el = refs[cardIdx].current
+      if (!el) { pending--; return }
+      const slot = makeSlot(slotIdx)
+      gsap.set(el, { zIndex: slot.zIndex })
+      gsap.to(el, {
+        x: slot.x, y: slot.y, z: slot.z,
+        duration: config.dur, ease: config.ease,
+        onComplete: () => { pending--; if (pending <= 0) animating.current = false },
+      })
+    })
+  }
+
+  useImperativeHandle(handleRef, () => ({ next: () => goTo(1), prev: () => goTo(-1) }))
+
+  const rendered = childArr.map((child, i) => {
+    if (!isValidElement(child)) return child
+    const el = child as ReactElement<CardProps & { ref?: React.Ref<HTMLDivElement> }>
+    return cloneElement(el, { key: i, ref: refs[i], style: { width, height, ...(el.props.style ?? {}) } })
+  })
+
+  return (
+    <div
+      ref={container}
+      style={{ position: 'relative', width, height, perspective: '900px', overflow: 'visible' }}
+    >
+      {rendered}
+    </div>
+  )
+})
 
 // ── StarRating ────────────────────────────────────────────────────────────────
 
@@ -44,7 +168,7 @@ export default function Testimonials() {
   const [rating, setRating] = useState(0)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
-  const [activeTestimonial, setActiveTestimonial] = useState(0)
+  const cardSwapRef = useRef<CardSwapHandle>(null)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -89,75 +213,54 @@ export default function Testimonials() {
           </p>
         </motion.div>
 
-        {/* Testimonial display — click-to-select, no auto-rotation */}
+        {/* CardSwap display — manual prev/next, no timer */}
         {hasTestimonials && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-16"
+            className="flex flex-col items-center mb-16"
           >
-            <div className="relative max-w-2xl mx-auto">
-              {testimonialsData.length > 1 && (
+            <div className="flex justify-center" style={{ height: 340, overflow: 'visible' }}>
+              <CardSwap ref={cardSwapRef} width={400} height={300} cardDistance={55} verticalDistance={60}>
+                {testimonialsData.map((t) => (
+                  <Card key={t.id}>
+                    <div className="w-full h-full flex flex-col justify-between p-6">
+                      <div className="space-y-3 overflow-y-auto">
+                        <StarRating value={t.rating} />
+                        <p className="text-gray-300 text-sm leading-relaxed">
+                          &ldquo;{t.comment}&rdquo;
+                        </p>
+                      </div>
+                      <div className="pt-3 border-t border-cyber-yellow/10 flex items-center justify-between">
+                        <div>
+                          <p className="text-white text-sm font-medium">{t.name}</p>
+                          <p className="text-gray-500 text-xs font-mono">{t.relationship}</p>
+                        </div>
+                        <p className="text-gray-600 text-xs font-mono">{t.date}</p>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </CardSwap>
+            </div>
+
+            {testimonialsData.length > 1 && (
+              <div className="flex items-center gap-4 mt-6">
                 <button
-                  onClick={() => setActiveTestimonial((i) => (i === 0 ? testimonialsData.length - 1 : i - 1))}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-12 z-10 w-9 h-9 flex items-center justify-center border border-cyber-yellow/30 text-cyber-yellow hover:bg-cyber-yellow/10 hover:border-cyber-yellow transition-colors"
+                  onClick={() => cardSwapRef.current?.prev()}
+                  className="w-9 h-9 flex items-center justify-center border border-cyber-yellow/30 text-cyber-yellow hover:bg-cyber-yellow/10 hover:border-cyber-yellow transition-colors"
                   aria-label="Previous testimonial"
                 >
                   <ChevronLeft size={18} />
                 </button>
-              )}
-
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeTestimonial}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.25 }}
-                  className="cyber-card p-6 sm:p-8"
-                >
-                  <Quote className="w-6 h-6 text-cyber-yellow/40 mb-3" />
-                  <StarRating value={testimonialsData[activeTestimonial].rating} />
-                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed mt-4 mb-6">
-                    &ldquo;{testimonialsData[activeTestimonial].comment}&rdquo;
-                  </p>
-                  <div className="pt-4 border-t border-cyber-yellow/10 flex items-center justify-between">
-                    <div>
-                      <p className="text-white text-sm font-medium">{testimonialsData[activeTestimonial].name}</p>
-                      <p className="text-gray-500 text-xs font-mono">{testimonialsData[activeTestimonial].relationship}</p>
-                    </div>
-                    <p className="text-gray-600 text-xs font-mono">{testimonialsData[activeTestimonial].date}</p>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              {testimonialsData.length > 1 && (
                 <button
-                  onClick={() => setActiveTestimonial((i) => (i === testimonialsData.length - 1 ? 0 : i + 1))}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-12 z-10 w-9 h-9 flex items-center justify-center border border-cyber-yellow/30 text-cyber-yellow hover:bg-cyber-yellow/10 hover:border-cyber-yellow transition-colors"
+                  onClick={() => cardSwapRef.current?.next()}
+                  className="w-9 h-9 flex items-center justify-center border border-cyber-yellow/30 text-cyber-yellow hover:bg-cyber-yellow/10 hover:border-cyber-yellow transition-colors"
                   aria-label="Next testimonial"
                 >
                   <ChevronRight size={18} />
                 </button>
-              )}
-            </div>
-
-            {testimonialsData.length > 1 && (
-              <div className="flex flex-wrap justify-center gap-2 mt-6">
-                {testimonialsData.map((t, i) => (
-                  <button
-                    key={t.id}
-                    onClick={() => setActiveTestimonial(i)}
-                    className={`px-4 py-2 font-mono text-xs tracking-wider border transition-all duration-300 ${
-                      i === activeTestimonial
-                        ? 'bg-cyber-yellow text-cyber-bg border-cyber-yellow'
-                        : 'border-gray-700 text-gray-400 hover:border-cyber-yellow/50 hover:text-gray-300'
-                    }`}
-                  >
-                    {t.name}
-                  </button>
-                ))}
               </div>
             )}
           </motion.div>
