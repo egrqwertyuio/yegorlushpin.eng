@@ -41,7 +41,7 @@ export default function RootLayout({
             pixelSize={3}
             waveAmplitude={0.35}
             waveFrequency={5.5}
-            waveSpeed={0.08}
+            waveSpeed={0.04}
           />
         </div>
         <Navbar />
