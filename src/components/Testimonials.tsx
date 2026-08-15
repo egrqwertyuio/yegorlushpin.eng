@@ -1,143 +1,9 @@
 'use client'
 
-import React, {
-  useState, useRef, useEffect, useMemo,
-  Children, cloneElement, isValidElement,
-  forwardRef, createRef,
-  type ReactElement,
-} from 'react'
+import React, { useState, useRef } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Star, Send, CheckCircle, ChevronDown, ChevronUp } from 'lucide-react'
-import gsap from 'gsap'
+import { Star, Send, CheckCircle, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, Quote } from 'lucide-react'
 import { testimonialsData } from '@/lib/data'
-
-// ── CardSwap (inlined from react-bits) ───────────────────────────────────────
-
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  customClass?: string
-}
-
-const Card = forwardRef<HTMLDivElement, CardProps>(({ customClass, style, ...rest }, ref) => (
-  <div
-    ref={ref}
-    {...rest}
-    style={{
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      borderRadius: '2px',
-      border: '1px solid rgba(255,255,255,0.2)',
-      background: '#0a0a0a',
-      transformStyle: 'preserve-3d',
-      willChange: 'transform',
-      backfaceVisibility: 'hidden',
-      ...style,
-    }}
-    className={`${customClass ?? ''} ${rest.className ?? ''}`}
-  />
-))
-Card.displayName = 'Card'
-
-interface CardSwapProps {
-  width?: number
-  height?: number
-  cardDistance?: number
-  verticalDistance?: number
-  delay?: number
-  pauseOnHover?: boolean
-  skewAmount?: number
-  easing?: 'elastic' | 'power'
-  children: React.ReactNode
-}
-
-function CardSwap({
-  width = 340,
-  height = 220,
-  cardDistance = 50,
-  verticalDistance = 55,
-  delay = 4000,
-  pauseOnHover = true,
-  skewAmount = 4,
-  easing = 'elastic',
-  children,
-}: CardSwapProps) {
-  const config =
-    easing === 'elastic'
-      ? { ease: 'elastic.out(0.6,0.9)', durDrop: 2, durMove: 2, durReturn: 2, promoteOverlap: 0.9, returnDelay: 0.05 }
-      : { ease: 'power1.inOut', durDrop: 0.8, durMove: 0.8, durReturn: 0.8, promoteOverlap: 0.45, returnDelay: 0.2 }
-
-  const childArr = useMemo(() => Children.toArray(children), [children])
-  const refs = useMemo(() => childArr.map(() => createRef<HTMLDivElement>()), [childArr.length])
-  const order = useRef(Array.from({ length: childArr.length }, (_, i) => i))
-  const tlRef = useRef<gsap.core.Timeline | null>(null)
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
-  const container = useRef<HTMLDivElement>(null)
-
-  const makeSlot = (i: number) => ({
-    x: i * cardDistance,
-    y: -i * verticalDistance,
-    z: -i * cardDistance * 1.5,
-    zIndex: childArr.length - i,
-  })
-
-  const placeNow = (el: HTMLDivElement, slot: ReturnType<typeof makeSlot>) =>
-    gsap.set(el, { x: slot.x, y: slot.y, z: slot.z, xPercent: -50, yPercent: -50, skewY: skewAmount, transformOrigin: 'center center', zIndex: slot.zIndex, force3D: true })
-
-  useEffect(() => {
-    refs.forEach((r, i) => { if (r.current) placeNow(r.current, makeSlot(i)) })
-
-    const swap = () => {
-      if (order.current.length < 2) return
-      const [front, ...rest] = order.current
-      const elFront = refs[front].current!
-      const tl = gsap.timeline()
-      tlRef.current = tl
-
-      tl.to(elFront, { y: '+=500', duration: config.durDrop, ease: config.ease })
-      tl.addLabel('promote', `-=${config.durDrop * config.promoteOverlap}`)
-      rest.forEach((idx, i) => {
-        const el = refs[idx].current!
-        const slot = makeSlot(i)
-        tl.set(el, { zIndex: slot.zIndex }, 'promote')
-        tl.to(el, { x: slot.x, y: slot.y, z: slot.z, duration: config.durMove, ease: config.ease }, `promote+=${i * 0.15}`)
-      })
-      const backSlot = makeSlot(refs.length - 1)
-      tl.addLabel('return', `promote+=${config.durMove * config.returnDelay}`)
-      tl.call(() => { gsap.set(elFront, { zIndex: backSlot.zIndex }) }, undefined, 'return')
-      tl.to(elFront, { x: backSlot.x, y: backSlot.y, z: backSlot.z, duration: config.durReturn, ease: config.ease }, 'return')
-      tl.call(() => { order.current = [...rest, front] })
-    }
-
-    swap()
-    intervalRef.current = setInterval(swap, delay)
-
-    if (pauseOnHover && container.current) {
-      const node = container.current
-      const pause = () => { tlRef.current?.pause(); if (intervalRef.current) clearInterval(intervalRef.current) }
-      const resume = () => { tlRef.current?.play(); intervalRef.current = setInterval(swap, delay) }
-      node.addEventListener('mouseenter', pause)
-      node.addEventListener('mouseleave', resume)
-      return () => { node.removeEventListener('mouseenter', pause); node.removeEventListener('mouseleave', resume); if (intervalRef.current) clearInterval(intervalRef.current) }
-    }
-
-    return () => { if (intervalRef.current) clearInterval(intervalRef.current) }
-  }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing])
-
-  const rendered = childArr.map((child, i) => {
-    if (!isValidElement(child)) return child
-    const el = child as ReactElement<CardProps & { ref?: React.Ref<HTMLDivElement> }>
-    return cloneElement(el, { key: i, ref: refs[i], style: { width, height, ...(el.props.style ?? {}) } })
-  })
-
-  return (
-    <div
-      ref={container}
-      style={{ position: 'relative', width, height, perspective: '900px', overflow: 'visible' }}
-    >
-      {rendered}
-    </div>
-  )
-}
 
 // ── StarRating ────────────────────────────────────────────────────────────────
 
@@ -178,6 +44,7 @@ export default function Testimonials() {
   const [rating, setRating] = useState(0)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
+  const [activeTestimonial, setActiveTestimonial] = useState(0)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -222,36 +89,77 @@ export default function Testimonials() {
           </p>
         </motion.div>
 
-        {/* CardSwap display */}
+        {/* Testimonial display — click-to-select, no auto-rotation */}
         {hasTestimonials && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex justify-center mb-16"
-            style={{ height: 440, overflow: 'visible' }}
+            className="mb-16"
           >
-            <CardSwap width={400} height={300} delay={4500} pauseOnHover cardDistance={55} verticalDistance={60}>
-              {testimonialsData.map((t) => (
-                <Card key={t.id}>
-                  <div className="w-full h-full flex flex-col justify-between p-6">
-                    <div className="space-y-3 overflow-y-auto">
-                      <StarRating value={t.rating} />
-                      <p className="text-gray-300 text-sm leading-relaxed">
-                        &ldquo;{t.comment}&rdquo;
-                      </p>
+            <div className="relative max-w-2xl mx-auto">
+              {testimonialsData.length > 1 && (
+                <button
+                  onClick={() => setActiveTestimonial((i) => (i === 0 ? testimonialsData.length - 1 : i - 1))}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-12 z-10 w-9 h-9 flex items-center justify-center border border-cyber-yellow/30 text-cyber-yellow hover:bg-cyber-yellow/10 hover:border-cyber-yellow transition-colors"
+                  aria-label="Previous testimonial"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+              )}
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTestimonial}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.25 }}
+                  className="cyber-card p-6 sm:p-8"
+                >
+                  <Quote className="w-6 h-6 text-cyber-yellow/40 mb-3" />
+                  <StarRating value={testimonialsData[activeTestimonial].rating} />
+                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed mt-4 mb-6">
+                    &ldquo;{testimonialsData[activeTestimonial].comment}&rdquo;
+                  </p>
+                  <div className="pt-4 border-t border-cyber-yellow/10 flex items-center justify-between">
+                    <div>
+                      <p className="text-white text-sm font-medium">{testimonialsData[activeTestimonial].name}</p>
+                      <p className="text-gray-500 text-xs font-mono">{testimonialsData[activeTestimonial].relationship}</p>
                     </div>
-                    <div className="pt-3 border-t border-cyber-yellow/10 flex items-center justify-between">
-                      <div>
-                        <p className="text-white text-sm font-medium">{t.name}</p>
-                        <p className="text-gray-500 text-xs font-mono">{t.relationship}</p>
-                      </div>
-                      <p className="text-gray-600 text-xs font-mono">{t.date}</p>
-                    </div>
+                    <p className="text-gray-600 text-xs font-mono">{testimonialsData[activeTestimonial].date}</p>
                   </div>
-                </Card>
-              ))}
-            </CardSwap>
+                </motion.div>
+              </AnimatePresence>
+
+              {testimonialsData.length > 1 && (
+                <button
+                  onClick={() => setActiveTestimonial((i) => (i === testimonialsData.length - 1 ? 0 : i + 1))}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-12 z-10 w-9 h-9 flex items-center justify-center border border-cyber-yellow/30 text-cyber-yellow hover:bg-cyber-yellow/10 hover:border-cyber-yellow transition-colors"
+                  aria-label="Next testimonial"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              )}
+            </div>
+
+            {testimonialsData.length > 1 && (
+              <div className="flex flex-wrap justify-center gap-2 mt-6">
+                {testimonialsData.map((t, i) => (
+                  <button
+                    key={t.id}
+                    onClick={() => setActiveTestimonial(i)}
+                    className={`px-4 py-2 font-mono text-xs tracking-wider border transition-all duration-300 ${
+                      i === activeTestimonial
+                        ? 'bg-cyber-yellow text-cyber-bg border-cyber-yellow'
+                        : 'border-gray-700 text-gray-400 hover:border-cyber-yellow/50 hover:text-gray-300'
+                    }`}
+                  >
+                    {t.name}
+                  </button>
+                ))}
+              </div>
+            )}
           </motion.div>
         )}
 
