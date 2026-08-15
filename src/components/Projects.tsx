@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { ExternalLink, Github, ChevronRight, FileText } from 'lucide-react'
+import Link from 'next/link'
+import { ExternalLink, Github, ChevronRight, FileText, ArrowUpRight } from 'lucide-react'
 import { projectsData } from '@/lib/data'
 import ImageStack from './ImageStack'
 import ProjectDetails, { type ProjectDetailsData } from './ProjectDetails'
@@ -172,6 +173,15 @@ export default function Projects() {
                         <FileText size={16} />
                         <span>Details</span>
                       </button>
+                    )}
+                    {(project as { caseStudyUrl?: string }).caseStudyUrl && (
+                      <Link
+                        href={(project as { caseStudyUrl: string }).caseStudyUrl}
+                        className="flex items-center gap-1 text-sm text-gray-400 hover:text-cyber-yellow transition-colors"
+                      >
+                        <ArrowUpRight size={16} />
+                        <span>Full Breakdown</span>
+                      </Link>
                     )}
                     <motion.span
                       className="ml-auto text-cyber-yellow/50 group-hover:text-cyber-yellow transition-colors"
