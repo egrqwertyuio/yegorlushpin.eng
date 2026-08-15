@@ -556,7 +556,16 @@ export const testimonialsData: {
     comment: "Extremely proactive in seeking out action items to assist the electronics, battery and powertrain teams of Bearcats Electric Racing. A self stater who seeks out connections with other engineers who can offer a new perspective. Extremely diligent in his areas of interest",
     date: "2026-06",
   },
+  {
+    id: 2,
+    name: "DenZell Wallace",
+    relationship: "Teammate",
+    rating: 5,
+    comment: "Yegor is the ideal engineer, friend, and teammate. He consistently brings a positive energy that lights up any room. Beyond being incredibly approachable, he is exceptionally sharp. You can give Yegor almost any challenge, and he will either master it instantly or quickly learn what's needed to execute it flawlessly. Yegor is a standout individual and an incredibly talented young engineer—any team, company, or school would be fortunate to have him!",
+    date: "2026-08",
+  },
 ];
+
 
 export const navLinks = [
   { name: "About", href: "#about" },
