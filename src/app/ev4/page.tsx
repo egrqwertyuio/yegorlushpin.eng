@@ -33,7 +33,7 @@ const ev5BenchGallery = [
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <span className="font-mono text-cyber-yellow text-xs uppercase tracking-widest">
+    <span className="font-mono text-cyber-yellow text-xs tracking-widest">
       {children}
     </span>
   )
@@ -62,13 +62,13 @@ function ResultsTable() {
       <table className="w-full text-sm min-w-[560px]">
         <thead>
           <tr className="border-b border-gray-800 bg-cyber-yellow/5">
-            <th className="text-left px-3 py-2 font-mono text-gray-500 text-xs uppercase tracking-wider">Cell (Article 01)</th>
-            <th className="text-right px-3 py-2 font-mono text-gray-500 text-xs uppercase tracking-wider">1C Capacity</th>
-            <th className="text-right px-3 py-2 font-mono text-gray-500 text-xs uppercase tracking-wider">1C ΔT</th>
-            <th className="text-right px-3 py-2 font-mono text-gray-500 text-xs uppercase tracking-wider">50A Trip Cap.</th>
-            <th className="text-right px-3 py-2 font-mono text-gray-500 text-xs uppercase tracking-wider">Frac. of 1C</th>
-            <th className="text-right px-3 py-2 font-mono text-gray-500 text-xs uppercase tracking-wider">Corrected R0</th>
-            <th className="text-right px-3 py-2 font-mono text-gray-500 text-xs uppercase tracking-wider">Heat @ 50A</th>
+            <th className="text-left px-3 py-2 font-mono text-gray-500 text-xs tracking-wider">Cell (Article 01)</th>
+            <th className="text-right px-3 py-2 font-mono text-gray-500 text-xs tracking-wider">1C Capacity</th>
+            <th className="text-right px-3 py-2 font-mono text-gray-500 text-xs tracking-wider">1C ΔT</th>
+            <th className="text-right px-3 py-2 font-mono text-gray-500 text-xs tracking-wider">50A Trip Cap.</th>
+            <th className="text-right px-3 py-2 font-mono text-gray-500 text-xs tracking-wider">Frac. of 1C</th>
+            <th className="text-right px-3 py-2 font-mono text-gray-500 text-xs tracking-wider">Corrected R0</th>
+            <th className="text-right px-3 py-2 font-mono text-gray-500 text-xs tracking-wider">Heat @ 50A</th>
           </tr>
         </thead>
         <tbody>
@@ -91,7 +91,7 @@ function ResultsTable() {
 
 export default function EV4Page() {
   return (
-    <div className="min-h-screen bg-cyber-bg py-20 px-4">
+    <div className="min-h-screen py-20 px-4">
       <div className="max-w-5xl mx-auto">
         <Link
           href="/#projects"
@@ -151,24 +151,24 @@ export default function EV4Page() {
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6 max-w-2xl">
             <div className="cyber-card p-3">
-              <p className="text-gray-500 text-xs font-mono uppercase">Pack</p>
+              <p className="text-gray-500 text-xs font-mono">Pack</p>
               <p className="text-white text-sm">140s4p, 560× P30B</p>
             </div>
             <div className="cyber-card p-3">
-              <p className="text-gray-500 text-xs font-mono uppercase">Voltage</p>
+              <p className="text-gray-500 text-xs font-mono">Voltage</p>
               <p className="text-white text-sm">588V max / 350V min</p>
             </div>
             <div className="cyber-card p-3">
-              <p className="text-gray-500 text-xs font-mono uppercase">Discharge</p>
+              <p className="text-gray-500 text-xs font-mono">Discharge</p>
               <p className="text-white text-sm">80kW peak / 120A cont.</p>
             </div>
             <div className="cyber-card p-3">
-              <p className="text-gray-500 text-xs font-mono uppercase">Module</p>
+              <p className="text-gray-500 text-xs font-mono">Module</p>
               <p className="text-white text-sm">28s4p, 112× P30B</p>
             </div>
           </div>
 
-          <h3 className="text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-3">What I Did</h3>
+          <h3 className="text-cyber-yellow font-mono text-sm tracking-wider mb-3">What I Did</h3>
           <ul className="space-y-2 mb-6 max-w-3xl">
             {[
               'Drafted busbar and fusible-link manufacturing drawings for the pack’s overcurrent protection: nickel and copper bus bar geometry, the busbar board PCB, and the fusible-link strips.',
@@ -203,7 +203,7 @@ export default function EV4Page() {
             <span className="px-2 py-1 bg-cyber-yellow/20 border border-cyber-yellow text-cyber-yellow text-xs font-mono">
               EV5 · 2026–2027
             </span>
-            <span className="px-2 py-1 bg-purple-500/20 border border-purple-400 text-purple-300 text-xs font-mono">
+            <span className="px-2 py-1 bg-black border border-white text-white text-xs font-mono">
               In Progress · Cell Testing Phase
             </span>
           </div>
@@ -219,7 +219,7 @@ export default function EV4Page() {
             simulations to size the pack and its cooling.
           </p>
 
-          <h3 className="text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-3">Bench Architecture</h3>
+          <h3 className="text-cyber-yellow font-mono text-sm tracking-wider mb-3">Bench Architecture</h3>
           <p className="text-gray-300 leading-relaxed mb-6 max-w-3xl">
             A BK Precision 8601 electronic load runs each test article through a Kelvin-clamped copper-lug
             fixture. Six thermocouples (five along the cell, one ambient) feed an ESP32 DAQ over serial, and a
@@ -230,7 +230,7 @@ export default function EV4Page() {
 
           <ProjectGallery items={ev5BenchGallery} title="EV5 Cell Characterization Bench" />
 
-          <h3 className="text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-3 mt-8">Test Procedure</h3>
+          <h3 className="text-cyber-yellow font-mono text-sm tracking-wider mb-3 mt-8">Test Procedure</h3>
           <ol className="space-y-2 mb-6 max-w-3xl">
             {[
               'Charge cells individually on an off-the-shelf charger, then finish balancing to 4.2V in parallel on a bench supply.',
@@ -255,7 +255,7 @@ export default function EV4Page() {
           <div className="cyber-card p-6 mb-8 border-cyber-orange/40">
             <div className="flex items-center gap-2 mb-3">
               <AlertTriangle className="w-4 h-4 text-cyber-orange flex-shrink-0" />
-              <span className="font-mono text-cyber-orange text-xs uppercase tracking-widest">Debugging the Rig</span>
+              <span className="font-mono text-cyber-orange text-xs tracking-widest">Debugging the Rig</span>
             </div>
             <h4 className="text-white font-semibold mb-2">The 4-wire Kelvin sense wasn&apos;t actually Kelvin</h4>
             <p className="text-gray-300 text-sm leading-relaxed mb-3">
@@ -280,7 +280,7 @@ export default function EV4Page() {
             </p>
           </div>
 
-          <h3 className="text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-3">Thermocouple Calibration</h3>
+          <h3 className="text-cyber-yellow font-mono text-sm tracking-wider mb-3">Thermocouple Calibration</h3>
           <p className="text-gray-300 leading-relaxed mb-6 max-w-3xl">
             Type-K exposed welded-junction thermocouples (0.2mm conductors) for fast response, a direct lesson
             from EV4, where slower TCs low-pass-filtered high-current transients. Ice-bath calibration: TC6 (the
@@ -289,7 +289,7 @@ export default function EV4Page() {
             global correction, the most accurate calibration achievable without lab-grade equipment.
           </p>
 
-          <h3 className="text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-3">Results So Far</h3>
+          <h3 className="text-cyber-yellow font-mono text-sm tracking-wider mb-3">Results So Far</h3>
           <p className="text-gray-500 text-sm mb-4 max-w-3xl">
             Three candidate cells, article 01 each. R0 is corrected with the 5.544 mΩ rig-resistance margin
             from the Kelvin-sense fix above. Treat as provisional pending the spot-welded-sense retest.
@@ -298,7 +298,7 @@ export default function EV4Page() {
             <ResultsTable />
           </div>
 
-          <h3 className="text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-3">Endurance Simulation &amp; Telemetry</h3>
+          <h3 className="text-cyber-yellow font-mono text-sm tracking-wider mb-3">Endurance Simulation &amp; Telemetry</h3>
           <p className="text-gray-300 leading-relaxed mb-4 max-w-3xl">
             To sanity-check candidate pack configurations before EV5 has its own energy-meter data, I built
             early endurance lap simulations and calibrated them against energy-meter telemetry from other

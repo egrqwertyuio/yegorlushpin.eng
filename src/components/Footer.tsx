@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Mail, Zap, Heart } from 'lucide-react'
+import { Github, Linkedin, Mail, Heart } from 'lucide-react'
 import { siteConfig, navLinks } from '@/lib/data'
 
 export default function Footer() {
@@ -24,10 +24,9 @@ export default function Footer() {
           <div className="space-y-4">
             <motion.a
               href="#"
-              className="flex items-center gap-2 text-cyber-yellow font-display font-bold text-xl"
+              className="text-cyber-yellow font-display font-bold text-xl"
               whileHover={{ scale: 1.05 }}
             >
-              <Zap className="w-6 h-6" />
               <span>{siteConfig.name}</span>
             </motion.a>
             <p className="text-gray-400 text-sm max-w-xs">
@@ -37,7 +36,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-cyber-yellow font-mono text-sm tracking-wider mb-4">
               Quick Links
             </h3>
             <nav className="space-y-2">
@@ -57,7 +56,7 @@ export default function Footer() {
 
           {/* Contact & Social */}
           <div>
-            <h3 className="text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-cyber-yellow font-mono text-sm tracking-wider mb-4">
               Connect
             </h3>
             <div className="flex gap-4 mb-4">

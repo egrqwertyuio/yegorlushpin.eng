@@ -1,46 +1,12 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Mail, FileText, ChevronRight } from 'lucide-react'
 import { siteConfig } from '@/lib/data'
 
-const MagnetLines = dynamic(() => import('./MagnetLines'), {
-  ssr: false,
-  loading: () => null,
-})
-
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#060010]">
-      {/* Mobile background - simple animated gradient */}
-      <div className="absolute inset-0 md:hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-cyber-yellow/5 via-transparent to-cyber-orange/5" />
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyber-yellow/10 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 4, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-cyber-orange/10 rounded-full blur-3xl"
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.5, 0.3, 0.5] }}
-          transition={{ duration: 4, repeat: Infinity }}
-        />
-      </div>
-
-      {/* Desktop background - MagnetLines */}
-      <div className="absolute inset-0 opacity-30 hidden md:block">
-        <MagnetLines
-          rows={12}
-          columns={20}
-          lineColor="#FFD700"
-          lineWidth="3px"
-          lineHeight="70px"
-          baseAngle={-45}
-          className="w-full h-full"
-        />
-      </div>
-
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center">
           {/* Terminal-style intro */}
@@ -105,7 +71,7 @@ export default function Hero() {
           >
             <motion.a
               href="#projects"
-              className="group flex items-center gap-2 px-8 py-4 bg-cyber-yellow text-cyber-bg font-mono font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-cyber-yellow-bright hover:shadow-[0_0_30px_rgba(255,215,0,0.5)]"
+              className="group flex items-center gap-2 px-8 py-4 bg-cyber-yellow text-cyber-bg font-mono font-semibold tracking-wider transition-all duration-300 hover:bg-cyber-yellow-bright hover:shadow-[0_0_30px_rgba(255,255,255,0.35)]"
               style={{
                 clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)',
               }}
@@ -118,7 +84,7 @@ export default function Hero() {
 
             <motion.a
               href={siteConfig.resumeUrl}
-              className="flex items-center gap-2 px-8 py-4 border border-cyber-yellow text-cyber-yellow font-mono font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-cyber-yellow/10"
+              className="flex items-center gap-2 px-8 py-4 border border-cyber-yellow text-cyber-yellow font-mono font-semibold tracking-wider transition-all duration-300 hover:bg-cyber-yellow/10"
               style={{
                 clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)',
               }}
@@ -131,7 +97,7 @@ export default function Hero() {
 
             <motion.a
               href="#contact"
-              className="flex items-center gap-2 px-8 py-4 border border-cyber-orange text-cyber-orange font-mono font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-cyber-orange/10"
+              className="flex items-center gap-2 px-8 py-4 border border-cyber-orange text-cyber-orange font-mono font-semibold tracking-wider transition-all duration-300 hover:bg-cyber-orange/10"
               style={{
                 clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)',
               }}
@@ -185,16 +151,10 @@ export default function Hero() {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <span className="text-xs font-mono uppercase tracking-widest">Scroll</span>
+          <span className="text-xs font-mono tracking-widest">Scroll</span>
           <ArrowDown size={20} />
         </motion.a>
       </motion.div>
-
-      {/* Corner decorations */}
-      <div className="absolute top-20 left-4 w-20 h-20 border-l-2 border-t-2 border-cyber-yellow/30" />
-      <div className="absolute top-20 right-4 w-20 h-20 border-r-2 border-t-2 border-cyber-yellow/30" />
-      <div className="absolute bottom-20 left-4 w-20 h-20 border-l-2 border-b-2 border-cyber-orange/30" />
-      <div className="absolute bottom-20 right-4 w-20 h-20 border-r-2 border-b-2 border-cyber-orange/30" />
     </section>
   )
 }

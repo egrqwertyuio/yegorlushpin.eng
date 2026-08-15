@@ -3,15 +3,9 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import dynamic from 'next/dynamic'
 import { Cpu, Code, Wrench, Terminal } from 'lucide-react'
 import { skillsData } from '@/lib/data'
 import SpotlightCard from './SpotlightCard'
-
-const MetaBalls = dynamic(() => import('./MetaBalls'), {
-  ssr: false,
-  loading: () => null,
-})
 
 const categories = [
   { id: 'hardware', name: 'Hardware', icon: Cpu, data: skillsData.hardware },
@@ -28,23 +22,7 @@ export default function Skills() {
   const activeData = categories.find(c => c.id === activeCategory)?.data || []
 
   return (
-    <section id="skills" className="py-20 relative bg-cyber-bg-light overflow-hidden" ref={ref}>
-      {/* MetaBalls Background */}
-      <div className="absolute inset-0 opacity-40">
-        <MetaBalls
-          color="#FFD700"
-          cursorBallColor="#FF8C00"
-          speed={0.3}
-          enableMouseInteraction={true}
-          hoverSmoothness={0.05}
-          animationSize={30}
-          ballCount={12}
-          clumpFactor={1.2}
-          cursorBallSize={2}
-          enableTransparency={true}
-        />
-      </div>
-
+    <section id="skills" className="py-20 relative overflow-hidden" ref={ref}>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         {/* Section Header */}
         <motion.div
@@ -53,7 +31,7 @@ export default function Skills() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-cyber-yellow text-sm uppercase tracking-widest">
+          <span className="font-mono text-cyber-yellow text-sm tracking-widest">
             // Technical Expertise
           </span>
           <h2 className="section-heading mt-4">
@@ -72,7 +50,7 @@ export default function Skills() {
             <motion.button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`flex items-center gap-2 px-6 py-3 font-mono text-sm uppercase tracking-wider transition-all duration-300 ${
+              className={`flex items-center gap-2 px-6 py-3 font-mono text-sm tracking-wider transition-all duration-300 ${
                 activeCategory === category.id
                   ? 'bg-cyber-yellow text-cyber-bg'
                   : 'border border-cyber-yellow/30 text-gray-400 hover:border-cyber-yellow hover:text-cyber-yellow'

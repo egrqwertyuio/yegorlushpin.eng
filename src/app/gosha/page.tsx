@@ -14,7 +14,7 @@ const goshaImages = [
 
 export default function GoshaPage() {
   return (
-    <div className="min-h-screen bg-cyber-bg py-20 px-4">
+    <div className="min-h-screen py-20 px-4">
       <div className="max-w-4xl mx-auto">
         <Link
           href="/#contact"
@@ -33,7 +33,7 @@ export default function GoshaPage() {
             Meet <span className="text-cyber-yellow">Gosha</span>
           </h1>
           <p className="text-gray-400 flex items-center justify-center gap-2">
-            My 2 year old squishy pug <Heart className="w-4 h-4 text-red-500 fill-red-500" />
+            My 2 year old squishy pug <Heart className="w-4 h-4 text-white fill-white" />
           </p>
         </motion.div>
 

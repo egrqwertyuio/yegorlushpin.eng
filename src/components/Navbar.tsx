@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Zap } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { navLinks, siteConfig } from '@/lib/data'
 
 export default function Navbar() {
@@ -30,11 +30,10 @@ export default function Navbar() {
           {/* Logo */}
           <motion.a
             href="#"
-            className="flex items-center gap-2 text-cyber-yellow font-display font-bold text-xl"
+            className="text-cyber-yellow font-display font-bold text-xl"
             whileHover={{ scale: 1.05 }}
           >
-            <Zap className="w-6 h-6" />
-            <span className="hidden sm:inline">{siteConfig.name.split(' ')[0]}</span>
+            <span>{siteConfig.name.split(' ')[0]}</span>
           </motion.a>
 
           {/* Desktop Navigation */}
@@ -43,7 +42,7 @@ export default function Navbar() {
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="text-gray-300 hover:text-cyber-yellow transition-colors font-mono text-sm uppercase tracking-wider animated-underline"
+                className="text-gray-300 hover:text-cyber-yellow transition-colors font-mono text-sm tracking-wider animated-underline"
                 whileHover={{ y: -2 }}
               >
                 {link.name}
@@ -88,7 +87,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                   onClick={() => setIsOpen(false)}
-                  className="block text-gray-300 hover:text-cyber-yellow transition-colors font-mono text-sm uppercase tracking-wider py-2"
+                  className="block text-gray-300 hover:text-cyber-yellow transition-colors font-mono text-sm tracking-wider py-2"
                 >
                   <span className="text-cyber-yellow mr-2">//</span>
                   {link.name}

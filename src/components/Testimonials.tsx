@@ -26,8 +26,8 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({ customClass, style, ...res
       top: '50%',
       left: '50%',
       borderRadius: '2px',
-      border: '1px solid rgba(255,215,0,0.25)',
-      background: '#07000f',
+      border: '1px solid rgba(255,255,255,0.2)',
+      background: '#0a0a0a',
       transformStyle: 'preserve-3d',
       willChange: 'transform',
       backfaceVisibility: 'hidden',
@@ -204,10 +204,6 @@ export default function Testimonials() {
 
   return (
     <section id="testimonials" className="py-20 relative" ref={ref}>
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/3 w-96 h-96 bg-cyber-yellow/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-cyber-orange/5 rounded-full blur-3xl" />
-      </div>
 
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -217,7 +213,7 @@ export default function Testimonials() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-cyber-yellow text-sm uppercase tracking-widest">
+          <span className="font-mono text-cyber-yellow text-sm tracking-widest">
             // From People I&apos;ve Worked With
           </span>
           <h2 className="section-heading mt-4">Testimonials</h2>
@@ -233,15 +229,15 @@ export default function Testimonials() {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex justify-center mb-16"
-            style={{ height: 320, overflow: 'visible' }}
+            style={{ height: 440, overflow: 'visible' }}
           >
-            <CardSwap width={340} height={210} delay={4500} pauseOnHover cardDistance={55} verticalDistance={60}>
+            <CardSwap width={400} height={300} delay={4500} pauseOnHover cardDistance={55} verticalDistance={60}>
               {testimonialsData.map((t) => (
                 <Card key={t.id}>
                   <div className="w-full h-full flex flex-col justify-between p-6">
-                    <div className="space-y-3">
+                    <div className="space-y-3 overflow-y-auto">
                       <StarRating value={t.rating} />
-                      <p className="text-gray-300 text-sm leading-relaxed line-clamp-4">
+                      <p className="text-gray-300 text-sm leading-relaxed">
                         &ldquo;{t.comment}&rdquo;
                       </p>
                     </div>
@@ -269,7 +265,7 @@ export default function Testimonials() {
             onClick={() => setFormOpen((o) => !o)}
             className="w-full cyber-card p-4 flex items-center justify-between text-cyber-yellow hover:bg-cyber-yellow/5 transition-colors"
           >
-            <span className="font-mono text-sm uppercase tracking-widest">
+            <span className="font-mono text-sm tracking-widest">
               {formOpen ? 'Close' : 'Leave a Review'}
             </span>
             {formOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
@@ -295,26 +291,26 @@ export default function Testimonials() {
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-5">
                       <div>
-                        <label className="block font-mono text-xs uppercase tracking-widest text-gray-400 mb-2">Your Name</label>
+                        <label className="block font-mono text-xs tracking-widest text-gray-400 mb-2">Your Name</label>
                         <input name="name" required maxLength={80} placeholder="Jane Smith" className="w-full bg-cyber-bg border border-cyber-yellow/20 text-white px-4 py-2 font-mono text-sm focus:outline-none focus:border-cyber-yellow/60 placeholder:text-gray-600" />
                       </div>
                       <div>
-                        <label className="block font-mono text-xs uppercase tracking-widest text-gray-400 mb-2">How We Know Each Other</label>
+                        <label className="block font-mono text-xs tracking-widest text-gray-400 mb-2">How We Know Each Other</label>
                         <select name="relationship" required defaultValue="" className="w-full bg-cyber-bg border border-cyber-yellow/20 text-white px-4 py-2 font-mono text-sm focus:outline-none focus:border-cyber-yellow/60 appearance-none">
                           <option value="" disabled>Select one…</option>
                           {RELATIONSHIPS.map((r) => <option key={r} value={r}>{r}</option>)}
                         </select>
                       </div>
                       <div>
-                        <label className="block font-mono text-xs uppercase tracking-widest text-gray-400 mb-2">Rating</label>
+                        <label className="block font-mono text-xs tracking-widest text-gray-400 mb-2">Rating</label>
                         <StarRating value={rating} onChange={setRating} />
                       </div>
                       <div>
-                        <label className="block font-mono text-xs uppercase tracking-widest text-gray-400 mb-2">Comment</label>
+                        <label className="block font-mono text-xs tracking-widest text-gray-400 mb-2">Comment</label>
                         <textarea name="comment" required maxLength={500} rows={4} placeholder="What was it like working with Yegor?" className="w-full bg-cyber-bg border border-cyber-yellow/20 text-white px-4 py-2 font-mono text-sm focus:outline-none focus:border-cyber-yellow/60 placeholder:text-gray-600 resize-none" />
                       </div>
                       {errorMsg && <p className="text-red-400 text-xs font-mono">{errorMsg}</p>}
-                      <button type="submit" disabled={status === 'loading'} className="flex items-center gap-2 bg-cyber-yellow/10 border border-cyber-yellow/40 text-cyber-yellow px-6 py-2 font-mono text-sm uppercase tracking-widest hover:bg-cyber-yellow/20 transition-colors disabled:opacity-50">
+                      <button type="submit" disabled={status === 'loading'} className="flex items-center gap-2 bg-cyber-yellow/10 border border-cyber-yellow/40 text-cyber-yellow px-6 py-2 font-mono text-sm tracking-widest hover:bg-cyber-yellow/20 transition-colors disabled:opacity-50">
                         <Send size={14} />
                         {status === 'loading' ? 'Sending…' : 'Submit'}
                       </button>

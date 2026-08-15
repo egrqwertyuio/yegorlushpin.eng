@@ -11,10 +11,7 @@ export default function Experience() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="experience" className="py-20 relative bg-cyber-bg-light" ref={ref}>
-      {/* Background pattern */}
-      <div className="absolute inset-0 circuit-bg opacity-20" />
-
+    <section id="experience" className="py-20 relative" ref={ref}>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -23,7 +20,7 @@ export default function Experience() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-cyber-yellow text-sm uppercase tracking-widest">
+          <span className="font-mono text-cyber-yellow text-sm tracking-widest">
             // Career Path
           </span>
           <h2 className="section-heading mt-4">
@@ -130,7 +127,7 @@ export default function Experience() {
         >
           <motion.a
             href="/resume.pdf"
-            className="inline-flex items-center gap-2 px-8 py-4 border border-cyber-yellow text-cyber-yellow font-mono uppercase tracking-wider hover:bg-cyber-yellow/10 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-4 border border-cyber-yellow text-cyber-yellow font-mono tracking-wider hover:bg-cyber-yellow/10 transition-all duration-300"
             style={{
               clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)',
             }}

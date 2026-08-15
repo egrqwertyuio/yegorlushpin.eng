@@ -7,7 +7,6 @@ import Link from 'next/link'
 import { ExternalLink, Github, ChevronRight, FileText, ArrowUpRight } from 'lucide-react'
 import { projectsData } from '@/lib/data'
 import ImageStack from './ImageStack'
-import ProjectDetails, { type ProjectDetailsData } from './ProjectDetails'
 
 const categories = ['All', 'Hardware', 'Software', 'Personal']
 
@@ -15,7 +14,6 @@ export default function Projects() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [filter, setFilter] = useState('All')
-  const [detailsProject, setDetailsProject] = useState<{ title: string; details: ProjectDetailsData } | null>(null)
 
   const filteredProjects = filter === 'All'
     ? projectsData
@@ -23,12 +21,6 @@ export default function Projects() {
 
   return (
     <section id="projects" className="py-20 relative" ref={ref}>
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-0 w-72 h-72 bg-cyber-orange/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-cyber-yellow/5 rounded-full blur-3xl" />
-      </div>
-
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -37,7 +29,7 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-cyber-yellow text-sm uppercase tracking-widest">
+          <span className="font-mono text-cyber-yellow text-sm tracking-widest">
             // Featured Work
           </span>
           <h2 className="section-heading mt-4">
@@ -56,7 +48,7 @@ export default function Projects() {
             <motion.button
               key={category}
               onClick={() => setFilter(category)}
-              className={`px-5 py-2 font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+              className={`px-5 py-2 font-mono text-xs tracking-wider transition-all duration-300 ${
                 filter === category
                   ? 'bg-cyber-yellow/20 border border-cyber-yellow text-cyber-yellow'
                   : 'border border-gray-700 text-gray-400 hover:border-cyber-yellow/50 hover:text-gray-300'
@@ -101,7 +93,7 @@ export default function Projects() {
 
                   {/* In Progress badge */}
                   {(project as { inProgress?: boolean }).inProgress && (
-                    <div className="absolute top-6 right-6 px-2 py-1 bg-purple-500/90 border border-purple-400 text-white text-xs font-mono z-50">
+                    <div className="absolute top-6 right-6 px-2 py-1 bg-black/90 border border-white text-white text-xs font-mono z-50">
                       In Progress
                     </div>
                   )}
@@ -162,17 +154,14 @@ export default function Projects() {
                         <span>Demo</span>
                       </a>
                     )}
-                    {(project as { details?: ProjectDetailsData }).details && (
-                      <button
-                        onClick={() => setDetailsProject({
-                          title: project.title,
-                          details: (project as { details: ProjectDetailsData }).details,
-                        })}
+                    {(project as { slug?: string }).slug && (
+                      <Link
+                        href={`/projects/${(project as { slug: string }).slug}`}
                         className="flex items-center gap-1 text-sm text-gray-400 hover:text-cyber-yellow transition-colors"
                       >
                         <FileText size={16} />
                         <span>Details</span>
-                      </button>
+                      </Link>
                     )}
                     {(project as { caseStudyUrl?: string }).caseStudyUrl && (
                       <Link
@@ -216,15 +205,6 @@ export default function Projects() {
           </motion.a>
         </motion.div>
       </div>
-
-      {/* Project Details Drawer */}
-      {detailsProject && (
-        <ProjectDetails
-          title={detailsProject.title}
-          details={detailsProject.details}
-          onClose={() => setDetailsProject(null)}
-        />
-      )}
     </section>
   )
 }

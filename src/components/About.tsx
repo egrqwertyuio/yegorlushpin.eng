@@ -15,12 +15,6 @@ export default function About() {
 
   return (
     <section id="about" className="py-20 relative" ref={ref}>
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-cyber-yellow/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyber-orange/5 rounded-full blur-3xl" />
-      </div>
-
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -29,7 +23,7 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-cyber-yellow text-sm uppercase tracking-widest">
+          <span className="font-mono text-cyber-yellow text-sm tracking-widest">
             // About Me
           </span>
           <h2 className="section-heading mt-4">
@@ -59,21 +53,9 @@ export default function About() {
                 <div className="absolute inset-0 bg-gradient-to-t from-cyber-bg/80 via-transparent to-transparent" />
               </div>
 
-              {/* Decorative elements */}
+              {/* Decorative frame corners */}
               <div className="absolute -top-4 -left-4 w-8 h-8 border-l-2 border-t-2 border-cyber-yellow" />
               <div className="absolute -bottom-4 -right-4 w-8 h-8 border-r-2 border-b-2 border-cyber-orange" />
-
-              {/* Animated circuit lines */}
-              <motion.div
-                className="absolute -right-8 top-1/4 w-16 h-px bg-gradient-to-r from-cyber-yellow to-transparent"
-                animate={{ opacity: [0.3, 1, 0.3] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-              <motion.div
-                className="absolute -left-8 bottom-1/4 w-16 h-px bg-gradient-to-l from-cyber-orange to-transparent"
-                animate={{ opacity: [0.3, 1, 0.3] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-              />
             </div>
           </motion.div>
 
@@ -92,7 +74,7 @@ export default function About() {
 
             {/* Specialties */}
             <div>
-              <h3 className="text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-4">
+              <h3 className="text-cyber-yellow font-mono text-sm tracking-wider mb-4">
                 Specialties
               </h3>
               <div className="grid grid-cols-2 gap-3">
@@ -116,7 +98,7 @@ export default function About() {
 
             {/* Education */}
             <div>
-              <h3 className="text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-4 flex items-center gap-2">
+              <h3 className="text-cyber-yellow font-mono text-sm tracking-wider mb-4 flex items-center gap-2">
                 <GraduationCap className="w-4 h-4" />
                 Education
               </h3>
@@ -132,7 +114,7 @@ export default function About() {
             {/* Certifications */}
             {aboutData.certifications.length > 0 && (
               <div>
-                <h3 className="text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-4 flex items-center gap-2">
+                <h3 className="text-cyber-yellow font-mono text-sm tracking-wider mb-4 flex items-center gap-2">
                   <Award className="w-4 h-4" />
                   Certifications
                 </h3>

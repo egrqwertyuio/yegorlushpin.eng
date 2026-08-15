@@ -141,6 +141,7 @@ export const projectsData = [
   },
   {
     id: 5,
+    slug: "heart-pcb",
     title: "Heart PCB Design",
     description: "Custom heart-shaped PCB with integrated LED lighting — designed in KiCad, fabricated externally, and hand-soldered. A practical exercise covering the full PCB workflow from schematic capture to assembled board.",
     image: "/images/projects/Personal Projects/heart pcb/heart_pcb.png",
@@ -157,67 +158,148 @@ export const projectsData = [
     demo: "",
     featured: false,
     details: {
-      objective: "Design and fabricate a custom heart-shaped PCB as a decorative LED piece. Primary goal was hands-on practice with the full PCB pipeline in KiCad — from schematic capture and layout to Gerber export, external fabrication, and SMD hand-soldering.",
-      bom: [
-        { item: "Custom PCB — JLCPCB (5-pack)", qty: "1 order", unitCost: "$5.00" },
-        { item: "WS2812B Addressable RGB LEDs", qty: "~20", unitCost: "$4.00" },
-        { item: "100nF Decoupling Capacitors (SMD 0805)", qty: "~20", unitCost: "$1.00" },
-        { item: "USB Type-A Power Connector", qty: "1", unitCost: "$0.50" },
-        { item: "PCB Standoffs", qty: "4", unitCost: "$1.00" },
+      deliverables: [
+        "Fully functional heart-shaped LED PCB with animated lighting patterns",
+        "Single-layer board designed end-to-end in KiCad — schematic capture through Gerber export",
+        "Externally fabricated via JLCPCB (5-pack) and hand-soldered SMD assembly",
+        "Total build cost ~$11.50 (PCB, WS2812B LEDs, decoupling caps, USB power connector, standoffs)",
       ],
-      totalCost: "~$11.50",
-      architecture: "Single-layer heart-shaped PCB. WS2812B LEDs arranged along the heart outline with a daisy-chained data line. 5V USB power input with 100nF bypass capacitors on every LED for supply-rail stability. Data signal driven directly from a microcontroller pin.",
-      process: [
-        "Sketched heart silkscreen outline in KiCad PCB editor and placed LED footprints along the path",
-        "Routed data chain and 5V/GND power rails; added bypass capacitors at each LED",
-        "Ran DRC — zero errors before exporting Gerbers",
-        "Ordered from JLCPCB (5-pack, ~1-week lead time)",
+      role: "Solo build — I ran the entire PCB pipeline myself, from schematic and heart-outline layout in KiCad through routing, DRC, Gerber export, fab ordering, and hand-soldering every SMD component under magnification.",
+      roleDetails: [
+        "Sketched the heart silkscreen outline in KiCad's PCB editor and placed WS2812B LED footprints along the path",
+        "Routed the daisy-chained data line and 5V/GND power rails, adding a 100nF bypass capacitor at every LED for supply-rail stability",
+        "Ran DRC until it came back clean, then exported Gerbers and ordered a 5-pack from JLCPCB",
         "Hand-soldered all SMD components under magnification",
-        "Verified power continuity and data chain, then tested LED animation sequences",
+        "Verified power continuity and the data chain end-to-end, then tested LED animation sequences",
       ],
-      results: "Fully functional LED heart with animated lighting patterns. Successfully demonstrated the end-to-end KiCad PCB workflow and SMD soldering technique.",
+      issues: [
+        {
+          issue: "[Add a specific issue you ran into here]",
+          fix: "[And how you diagnosed and fixed it]",
+        },
+      ],
     },
   },
   {
     id: 6,
-    title: "Cyber Glass",
-    description: "Cyberpunk-inspired AR wearable — a heads-up display built into a glasses form factor using an ESP32-CAM and a compact OLED. Early prototype and concept stage.",
-    image: "/images/projects/Personal Projects/CyberGlass/image0.jpeg",
+    slug: "cyber-deck",
+    title: "Cyber Deck",
+    description: "A pocket AI memory device, three hardware generations deep: an ESP32 wearable HUD, then a Raspberry Pi 4 with fully local transcription, now a palm-sized Raspberry Pi Zero 2W field recorder — basically a smart microphone at this point. Near-final — just needs a 3D-printed enclosure.",
+    image: "/images/projects/Personal Projects/CyberDeck v3/CyberDeck_V3_InHand.jpg",
     gallery: [
-      { type: "image" as const, src: "/images/projects/Personal Projects/CyberGlass/image0.jpeg", alt: "Cyber Glass prototype" },
+      { type: "image" as const, src: "/images/projects/Personal Projects/CyberDeck v3/CyberDeck_V3_InHand.jpg", alt: "Cyber Deck v3 (Raspberry Pi Zero 2W) held in hand — palm-sized" },
+      { type: "image" as const, src: "/images/projects/Personal Projects/CyberDeck v3/CyberDeck_V3_Components.jpg", alt: "Cyber Deck v3 components — 1.44in display HAT, lavalier mic, USB audio adapter" },
+      { type: "image" as const, src: "/images/projects/Personal Projects/CyberDeck v3/CyberDeck_V3_HardwareStack.jpg", alt: "Cyber Deck v3 hardware stack — display HAT, GPIO header, decoupling capacitors, battery" },
+      { type: "image" as const, src: "/images/projects/Personal Projects/CyberDeck v2/CyberDeck_V2_InHand.jpg", alt: "Cyber Deck v2 (Raspberry Pi 4) held in hand" },
+      { type: "image" as const, src: "/images/projects/Personal Projects/CyberDeck v2/CyberDeck_V2_StatusScreen.jpg", alt: "Cyber Deck v2 status screen — RAM, CPU, sync, Ollama" },
+      { type: "image" as const, src: "/images/projects/Personal Projects/CyberDeck v2/CyberDeck_V2_HardwareStack.jpg", alt: "Cyber Deck v2 hardware stack — Pi 4, touchscreen, UPS HAT" },
+      { type: "image" as const, src: "/images/projects/Personal Projects/CyberGlass/image0.jpeg", alt: "Cyber Glass v1 (ESP32) prototype" },
     ],
-    technologies: ["ESP32-S3", "ESP32-CAM", "OLED Display", "LiPo", "Wearables"],
+    technologies: ["Raspberry Pi Zero 2W", "Raspberry Pi 4", "ESP32-S3", "Python", "faster-Whisper", "Ollama", "Syncthing"],
     category: "Personal",
     github: "",
     demo: "",
     featured: false,
     inProgress: true,
-    details: {
-      objective: "Design a cyberpunk-inspired AR wearable — a compact heads-up display embedded in a glasses frame. Inspired by Cyberpunk 2077 aesthetics with practical smart-glass functionality: real-time overlays, camera input, and wireless connectivity.",
-      bom: [
-        { item: "ESP32-S3 (main MCU)", qty: "1", unitCost: "~$8.00" },
-        { item: "ESP32-CAM AI-Thinker (vision)", qty: "1", unitCost: "~$7.99" },
-        { item: "0.49″ Transparent OLED / Micro Display", qty: "1", unitCost: "~$15–30" },
-        { item: "LiPo Battery 300–500 mAh", qty: "1", unitCost: "~$5.00" },
-        { item: "TP4056 Charging + Protection Module", qty: "1", unitCost: "~$1.00" },
-        { item: "MPU-6050 IMU (gesture input)", qty: "1", unitCost: "~$2.00" },
-        { item: "INMP441 MEMS Microphone", qty: "1", unitCost: "~$3.00" },
-        { item: "3D-Printed Glasses Frame (PLA)", qty: "1", unitCost: "~$3.00" },
-      ],
-      totalCost: "~$45–60 estimated",
-      brainstorm: [
-        "Transparent OLED overlay for displaying time, notifications, and sensor readings without blocking vision",
-        "ESP32-CAM for real-time object detection or face recognition in-frame",
-        "IMU-based head-gesture control to navigate on-screen menus",
-        "BLE pairing to phone for notification mirroring and remote control",
-        "INMP441 microphone for wake-word detection and voice commands",
-        "Custom 3D-printed frame designed to conceal all components and wiring",
-        "USB-C charging via TP4056 module with battery protection circuit",
-      ],
-    },
+    stages: [
+      {
+        label: "V1 — Cyber Glass (ESP32)",
+        status: "Retired",
+        summary: "Wearable HUD prototype on an ESP32 — a transparent OLED meant to show live transcriptions and notes. The project that started the whole Cyber Deck lineage, retired once the ESP32 hit a hard compute ceiling.",
+        gallery: [
+          { type: "image" as const, src: "/images/projects/Personal Projects/CyberGlass/image0.jpeg", alt: "Cyber Glass ESP32 prototype" },
+        ],
+        deliverables: [
+          "Wearable HUD prototype — ESP32 driving a transparent OLED display",
+          "Audio capture streamed over WiFi to a home Flask server for processing",
+          "Working button input and display firmware",
+        ],
+        role: "Solo build — I wrote the full ESP32 firmware: audio capture, OLED display driver, a WiFi client talking to a Flask server at home, and button input handling. The original vision was a glasses attachment that could record conversations, transcribe them, and run GPS plus Edge AI locally on the glasses themselves.",
+        issues: [
+          {
+            issue: "The ESP32 didn't have anywhere near enough compute to run speech transcription or an LLM locally — the whole \"Edge AI on the glasses\" vision was a hardware ceiling, not a software problem.",
+            fix: "Confirmed there was no way to code around it — a microcontroller isn't going to run a language model. All intelligence had to live on a server at home, which meant the device only worked on home WiFi.",
+          },
+          {
+            issue: "A device that only works on home WiFi isn't actually a memory device you can rely on out in the world.",
+            fix: "Retired the ESP32 platform entirely and moved to a Raspberry Pi 4, which could run everything locally with no network dependency — the start of Cyber Deck v2.",
+          },
+        ],
+      },
+      {
+        label: "V2 — Raspberry Pi 4",
+        status: "Superseded",
+        summary: "Pocket recorder on a Raspberry Pi 4 with fully local transcription and querying — no cloud, no server. Proved local AI could work, but the build was too bulky to actually carry around.",
+        gallery: [
+          { type: "image" as const, src: "/images/projects/Personal Projects/CyberDeck v2/CyberDeck_V2_InHand.jpg", alt: "Cyber Deck v2 (Raspberry Pi 4) held in hand" },
+          { type: "image" as const, src: "/images/projects/Personal Projects/CyberDeck v2/CyberDeck_V2_StatusScreen.jpg", alt: "Cyber Deck v2 status screen — RAM, CPU, sync, Ollama" },
+          { type: "image" as const, src: "/images/projects/Personal Projects/CyberDeck v2/CyberDeck_V2_HardwareStack.jpg", alt: "Cyber Deck v2 hardware stack — Pi 4, touchscreen, UPS HAT" },
+        ],
+        deliverables: [
+          "Pocket-sized recorder with fully on-device transcription (faster-Whisper)",
+          "Local LLM (llama3.2 1B via Ollama) for summarization and querying",
+          "Semantic search over past recordings via ChromaDB",
+          "UPS-powered, auto-synced to my Obsidian vault via Syncthing",
+          "First real recordings transcribed, indexed, and synced end-to-end — the core loop worked",
+        ],
+        role: "Solo build — I designed the on-device AI pipeline on a Raspberry Pi 4: wired up faster-Whisper for local speech-to-text, Ollama running llama3.2 1B for summarization and querying, ChromaDB for semantic search, a UPS HAT for power, and Syncthing to push everything to my Obsidian vault. The point was proving how much useful AI you can run on about $100 of hardware with no internet connection — and it's not a surveillance device: it doesn't record people without asking, it's a notes tool, not a wire.",
+        issues: [
+          {
+            issue: "Whisper and the local LLM couldn't run at the same time in 4GB of RAM.",
+            fix: "Restructured the pipeline to run everything sequentially instead of in parallel — transcribe, then summarize, one at a time.",
+          },
+          {
+            issue: "GPIO conflicts between the touchscreen HAT and the UPS HAT took longer to debug than most of the software.",
+            fix: "Worked through the pin conflicts HAT by HAT until both could coexist on the same header.",
+          },
+          {
+            issue: "The finished build worked — first recordings were transcribed, indexed, and synced — but it was way too bulky to actually be a pocketable device.",
+            fix: "That's what prompted the full switch to a Raspberry Pi Zero 2W for v3, targeting a genuinely palm-sized form factor.",
+          },
+        ],
+      },
+      {
+        label: "V3 — Raspberry Pi Zero 2W",
+        status: "Current — near-final",
+        summary: "The finalized Cyber Deck — a palm-sized Raspberry Pi Zero 2W that does one job well: record reliably and hand audio to a laptop for transcription. Basically a smart microphone at this point. Just needs a 3D-printed enclosure.",
+        gallery: [
+          { type: "image" as const, src: "/images/projects/Personal Projects/CyberDeck v3/CyberDeck_V3_InHand.jpg", alt: "Cyber Deck v3 (Raspberry Pi Zero 2W) held in hand — palm-sized" },
+          { type: "image" as const, src: "/images/projects/Personal Projects/CyberDeck v3/CyberDeck_V3_Components.jpg", alt: "Cyber Deck v3 components — 1.44in display HAT, lavalier mic, USB audio adapter" },
+          { type: "image" as const, src: "/images/projects/Personal Projects/CyberDeck v3/CyberDeck_V3_HardwareStack.jpg", alt: "Cyber Deck v3 hardware stack — display HAT, GPIO header, decoupling capacitors, battery" },
+        ],
+        deliverables: [
+          "Palm-sized, record-only field recorder on a Raspberry Pi Zero 2W",
+          "Crash-safe WAV capture — periodically rewrites the file header so a power loss mid-recording leaves a valid, playable file",
+          "4 mic-reactive \"vibe\" screens (green bar, hacker rain, waves, face) plus a full diagnostics view on a 1.44\" LCD",
+          "PiSugar 2 UPS + RTC for battery power",
+          "Power-aware Syncthing sync — only syncs on home WiFi with battery at 30% or above, fails safe to paused",
+          "Basically a smart microphone at this point: record reliably, hand the WAV to a laptop, done",
+        ],
+        role: "Solo build — I rearchitected the whole system from scratch for the Zero 2W around one hard rule: recording is the sacred real-time task, and nothing else — display, sync, status polling — is ever allowed to interrupt it. Wrote the threaded Python app (audio monitor, display renderer, sync guard), the ST7735S display driver, the 4 mic-reactive UI screens, and the power/network-aware sync gate.",
+        issues: [
+          {
+            issue: "Porting the same faster-Whisper + ChromaDB stack from v2 onto the Zero 2W's 512MB of RAM caused repeated OOM kills and brownouts mid-recording.",
+            fix: "Cut local transcription entirely. The Pi's only job now is capturing audio reliably and handing WAVs to a laptop over Syncthing — all ML moved off-device, no heavy dependencies, no swapfile needed.",
+          },
+          {
+            issue: "The display driver claimed a GPIO pin the kernel already owned, crashing on startup with `lgpio.error: 'GPIO busy'`.",
+            fix: "Traced it to Raspberry Pi OS's default `dtparam=spi=on`, which keeps CE0 kernel-owned. Switching to `dtoverlay=spi0-0cs` in `/boot/firmware/config.txt` frees it for manual GPIO control — automated the fix in the setup script so it's not a one-off manual step.",
+          },
+          {
+            issue: "A mic-reconnect watchdog bug — if the USB mic dropped out, the app retried reconnecting exactly once, then silently gave up and kept running with no audio input.",
+            fix: "Fixed the watchdog to keep retrying indefinitely instead of giving up after one attempt, since a silent no-audio failure defeats the entire point of a recorder.",
+          },
+          {
+            issue: "Hot-plugging the mic while running on battery power had caused a brownout before.",
+            fix: "Added a startup check that verifies a capture device exists before the app runs at all — it refuses to start (with a clear error) rather than silently recording dead air.",
+          },
+        ],
+      },
+    ],
   },
   {
     id: 7,
+    slug: "6dof-robotic-arm",
     title: "6DoF Robotic Arm",
     description: "6 degrees-of-freedom robotic arm with a fully 3D-printed structure and servo-driven joints. Capable of autonomous pick-and-place operations with a programmable control system.",
     image: "/images/projects/Personal Projects/6DoF Robot/IMG_2568.jpeg",
@@ -232,29 +314,26 @@ export const projectsData = [
     featured: false,
     inProgress: true,
     details: {
-      objective: "Build a 6 degrees-of-freedom robotic arm capable of autonomous pick-and-place operations. Entirely 3D-printed structure with servo-driven joints and a programmable control system targeting inverse kinematics and teach-and-playback operation.",
-      bom: [
-        { item: "MG996R Metal Gear Servo Motors", qty: "6", unitCost: "~$18.00 total" },
-        { item: "Arduino Mega 2560", qty: "1", unitCost: "~$12.00" },
-        { item: "PCA9685 16-Ch PWM Servo Driver", qty: "1", unitCost: "~$4.99" },
-        { item: "5V 5A DC Power Supply", qty: "1", unitCost: "~$10.00" },
-        { item: "PLA Filament", qty: "~500g", unitCost: "~$10.00" },
-        { item: "M3 Screw & Hardware Kit", qty: "1 set", unitCost: "~$5.00" },
-        { item: "Buck Converter (12V → 5V logic)", qty: "1", unitCost: "~$2.00" },
-      ],
-      totalCost: "~$62",
-      brainstorm: [
+      deliverables: [
         "Forward and inverse kinematics for precise end-effector position control",
         "Teach-and-playback mode: manually position the arm, record joint angles, replay the sequence",
         "Computer vision integration (webcam + OpenCV) for object detection and autonomous grasping",
         "Custom web UI or PS4 controller for manual joint-by-joint operation",
         "G-code compatible command interface for CNC-style programmatic paths",
-        "End-effector options: gripper, suction cup, or pen for drawing",
+        "Interchangeable end-effectors: gripper, suction cup, or pen for drawing",
+      ],
+      role: "Solo build — I 3D-printed the full structure, wired six MG996R servos through a PCA9685 driver off an Arduino Mega 2560, and am now building out the control software (kinematics, teach-and-playback).",
+      issues: [
+        {
+          issue: "[Add a specific issue you ran into here]",
+          fix: "[And how you diagnosed and fixed it]",
+        },
       ],
     },
   },
   {
     id: 8,
+    slug: "jarvis-ai-assistant",
     title: "Jarvis AI Assistant",
     description: "Iron Man-inspired personal AI assistant. Wake-word activated, speech-to-text input, LLM-backed reasoning, and synthesized voice responses — running locally on a PC.",
     image: "/images/projects/Personal Projects/jarvis/image0.jpeg",
@@ -268,29 +347,34 @@ export const projectsData = [
     demo: "",
     featured: false,
     details: {
-      objective: "Build a voice-activated personal AI assistant inspired by Iron Man's J.A.R.V.I.S. The system listens for a wake word, transcribes speech, processes natural language commands through an LLM, and responds with a synthesized voice — all running locally.",
-      bom: [
-        { item: "PC / Laptop (existing hardware)", qty: "1", unitCost: "$0" },
-        { item: "USB Microphone", qty: "1", unitCost: "~$10.00" },
-        { item: "Speaker / Headphone Output", qty: "1", unitCost: "~$15.00" },
-        { item: "Python Libraries (all open-source)", qty: "—", unitCost: "$0" },
-        { item: "LLM API Access (e.g., OpenAI / Anthropic)", qty: "—", unitCost: "Pay-per-use" },
+      deliverables: [
+        "Wake-word-activated voice pipeline running fully locally on PC",
+        "Real-time speech-to-text via the Google Speech Recognition API",
+        "LLM-backed intent parsing and contextual response generation",
+        "Synthesized voice output via a custom JARVIS-style TTS pipeline",
+        "Modular skill system: weather lookup, time/date, web search, system commands",
+        "Packaged as a background service with a CLI interface",
       ],
-      totalCost: "~$25 hardware + API usage",
-      architecture: "Pipeline: wake-word detection (Porcupine / custom hotword engine) → SpeechRecognition (Google STT) for transcription → LLM API for intent parsing and response generation → pyttsx3 / ElevenLabs TTS for voice output. Modular Python architecture with pluggable skill modules (weather, system control, web search, timers).",
-      process: [
+      role: "Solo build — I designed and implemented the full modular pipeline from wake-word to voice response, and built out the skill-plugin system.",
+      roleDetails: [
         "Implemented hotword detection to trigger the listening pipeline without always-on STT",
-        "Integrated Google Speech Recognition API for accurate real-time transcription",
-        "Connected LLM backend to process intent and generate contextual responses",
-        "Built TTS pipeline with customized voice for the JARVIS persona",
-        "Added modular skill system: weather lookup, time/date, web search, system commands",
-        "Packaged as a background service with CLI interface",
+        "Integrated the Google Speech Recognition API for real-time transcription",
+        "Connected the LLM backend to process intent and generate contextual responses",
+        "Built the TTS pipeline with a customized voice for the JARVIS persona",
+        "Added the modular skill system: weather lookup, time/date, web search, system commands",
+        "Packaged the assistant as a background service with a CLI interface",
       ],
-      results: "Functional voice assistant capable of responding to natural language queries, answering questions via LLM, and executing system-level commands via voice. Continuous improvement ongoing.",
+      issues: [
+        {
+          issue: "[Add a specific issue you ran into here]",
+          fix: "[And how you diagnosed and fixed it]",
+        },
+      ],
     },
   },
   {
     id: 9,
+    slug: "pmr-robot",
     title: "PMR Robot",
     description: "ENED 1002c class project — a LEGO Mindstorms EV3 Prototype Mover Robot (PMR) that autonomously follows a closed-loop line path, picks up bins of shredded material, classifies them by weight, and delivers them to the correct drop-off location.",
     image: "/images/projects/PMR/Subtask2Finalpicture.jpg",
@@ -311,32 +395,45 @@ export const projectsData = [
     demo: "",
     featured: false,
     details: {
-      objective: "Design, build, and program a LEGO Mindstorms EV3 robot for ENED 1002c. The PMR must follow a closed-loop line path, autonomously detect and pick up bins of shredded material, classify them by weight (organic ~25g vs. metal ~125g), and deliver them to the correct drop-off station before returning to start.",
-      team: ["Yegor Lushpin", "Baolong Phan — Hardware Lead", "Ethan Myhal", "Andrew Sullivan"],
-      bom: [
-        { item: "LEGO Mindstorms EV3 Brick", qty: "1", unitCost: "Kit" },
-        { item: "Large EV3 Drive Motors", qty: "2", unitCost: "Kit" },
-        { item: "Medium EV3 Motor (grab/lift)", qty: "1", unitCost: "Kit" },
-        { item: "EV3 Color Sensors", qty: "2", unitCost: "Kit" },
-        { item: "EV3 Ultrasonic Sensor", qty: "1", unitCost: "Kit" },
-        { item: "EV3 Touch Sensor (E-stop)", qty: "1", unitCost: "Kit" },
+      deliverables: [
+        "Autonomous closed-loop line following via dual EV3 color sensors, handling both solid and dashed track lines",
+        "Ultrasonic-triggered object detection and forklift-style pickup with chopstick forks",
+        "Gyro-based weight classification distinguishing organic vs. metal bins",
+        "Color-coded drop-off at 2 zones, then autonomous return to the start line",
+        "Mean lap time of 33.69s with an 85% clean-run rate (17/20 trials) across 20 timed test runs",
       ],
-      totalCost: "University-provided LEGO Mindstorms EV3 Education Kit",
-      architecture: "Dual color-sensor line following: both white → forward, left black → turn left, right black → turn right. Full state machine in LabVIEW 2016 (single VI): IDLE → SCAN → APPROACH → GRAB → NAVIGATE → DEPOSIT → RETURN → STOP. Weight classification via motor encoder position (Motor Status block) after a timed grab. Gray hairline crossings on the track drive a drop-off counter distinguishing organic (counter=1) vs. metal (counter=2) stations.",
-      process: [
-        "Defined system requirements and sensor layout as a team in ENED 1002c",
-        "Built grab-and-lift mechanism using medium EV3 motor with claw attachment",
-        "Implemented dual color-sensor differential steering for line following",
-        "Developed weight detection using motor position feedback after a timed lift",
-        "Architected state machine inside a single LabVIEW VI with Flat Sequence Structure and shift registers",
-        "Calibrated sensor height (~1–1.5 cm from ground, straddling the 1-inch line) to resolve false-positive detections",
-        "Conducted structured testing across 7 categories: baseline, speed, sensor sensitivity, turning, error recovery, special features, and endurance",
+      role: "I was Lead Programmer on a 4-person team (Baolong Phan — design & manufacturing, Ethan Myhal — testing & research, Andrew Sullivan — documentation). I designed and implemented the robot's full LabVIEW state machine — NAVIGATE, DETECT BOX, PICKUP, CLASSIFY WEIGHT, NAVIGATE TO DROP-OFF, DEPOSIT, and RETURN TO LINE — as a single master VI, and tuned every sensor threshold used to trigger transitions between states.",
+      roleDetails: [
+        "Programmed dual-sensor differential steering for line following (left sensor sees black → turn left, right → turn right, both → gap/intersection handling)",
+        "Tuned the ultrasonic detection threshold (tested at 15cm and 10cm before settling on 5cm) for reliable pickup triggering",
+        "Programmed the pickup sequence (stop → close forks → raise to carry height → confirm grip via motor stall detection) and tuned grab power (tested at 25 and 20 before settling on 40)",
+        "Implemented gyro-based weight classification, setting the tilt-rate threshold that separates organic from metal bins",
+        "Programmed color-zone detection for drop-off routing and the deposit/return sequences",
+        "Ran and analyzed the Activity 9 statistical testing — 20 trials each for correction rate and lap time",
       ],
-      results: "Robot successfully demonstrated autonomous line following, weight-based classification, and bin delivery within the required course layout. All ENED 1002c project requirements met.",
+      issues: [
+        {
+          issue: "A single color sensor couldn't reliably follow dashed sections of the track — it lost the line at gaps and didn't recover consistently.",
+          fix: "Rewrote the line-following logic around two color sensors instead of one, letting the robot detect which side it had drifted off the line and actively correct instead of stopping to search.",
+        },
+        {
+          issue: "The robot would stop dead whenever both sensors saw black at once (intersections and wide gaps), which the original two-state steering logic didn't handle.",
+          fix: "Added a dedicated case to the state machine for the dual-black condition instead of letting it fall through to the default stop behavior.",
+        },
+        {
+          issue: "After depositing a box, the forklift would sometimes re-detect and re-pick it up.",
+          fix: "Traced it to the arms not opening fully after deposit — extended the arm-open sequence to its full range so the box clears the forks completely before the robot backs away.",
+        },
+        {
+          issue: "Line following worked in isolation and the pickup mechanism worked in isolation, but running them together on a live track surfaced failures neither subsystem test caught.",
+          fix: "Moved to full end-to-end integration testing earlier in the schedule instead of validating subsystems separately — the approach behind our Activity 9 statistical testing (33.69s mean lap time, 85% clean-run rate).",
+        },
+      ],
     },
   },
   {
     id: 11,
+    slug: "esp32-smart-flower-pot",
     title: "ESP32-CAM Smart Flower Pot",
     description: "IoT birthday gift — an ESP32-CAM detects a face, triggers LED animations, and displays personalized messages on an LCD. Fully remote-controllable via a cloud-connected Next.js web dashboard.",
     image: "",
@@ -347,29 +444,28 @@ export const projectsData = [
     demo: "",
     featured: false,
     details: {
-      objective: "Build a smart flower pot as a birthday gift. An ESP32-CAM detects when a specific person is in frame and triggers LED animations and personalized LCD messages. A cloud-connected web dashboard allows remote message updates and live camera access from anywhere.",
-      bom: [
-        { item: "ESP32-CAM (AI-Thinker)", qty: "1", unitCost: "$7.99" },
-        { item: "ESP32-C3 Super Mini", qty: "1", unitCost: "$4.49" },
-        { item: "QAPASS 16×2 I2C LCD Display", qty: "1", unitCost: "$3.99" },
-        { item: "5mm Red LEDs", qty: "6", unitCost: "$1.00" },
-        { item: "220Ω Resistors", qty: "6", unitCost: "$0.50" },
-        { item: "5V 2A USB Power Adapter", qty: "1", unitCost: "$6.99" },
-        { item: "PLA Filament (3D-printed pot)", qty: "~100g", unitCost: "$2.00" },
-        { item: "Jumper Wires / Connectors", qty: "Assorted", unitCost: "$2.00" },
+      deliverables: [
+        "Face-detection pipeline reliably triggering LED animations and personalized LCD messages",
+        "Remote web dashboard for uploading new messages and live camera access",
+        "Dual-MCU firmware (ESP32-CAM for vision, ESP32-C3 for peripherals) synced over UART",
+        "MQTT-over-TLS integration via HiveMQ Cloud for remote control",
+        "3D-printed enclosure housing both PCBs, the LCD, and internal wiring",
       ],
-      totalCost: "~$29",
-      architecture: "Dual-MCU design: ESP32-CAM (AI-Thinker) runs built-in face detection and streams camera feed; ESP32-C3 Super Mini manages 6 LEDs via PWM and drives the I2C LCD. The two MCUs communicate over UART. Both connect to HiveMQ Cloud via MQTT over TLS. A Next.js web dashboard deployed on Vercel allows uploading new messages and selecting LED animation patterns remotely.",
-      process: [
-        "Defined dual-MCU architecture to offload vision processing from peripheral control",
-        "Wrote PlatformIO firmware for ESP32-CAM: face-detection pipeline using built-in ML model + UART TX on detection event",
-        "Wrote PlatformIO firmware for ESP32-C3: UART RX handler, LED PWM animations (pulse, wave, sparkle, heartbeat), I2C LCD message display",
+      role: "Solo build — I architected the dual-MCU split, wrote firmware for both chips, and built the Next.js dashboard end-to-end.",
+      roleDetails: [
+        "Defined the dual-MCU architecture to offload vision processing from peripheral control",
+        "Wrote PlatformIO firmware for the ESP32-CAM: face-detection pipeline using its built-in ML model + UART TX on detection",
+        "Wrote PlatformIO firmware for the ESP32-C3: UART RX handler, LED PWM animations (pulse, wave, sparkle, heartbeat), I2C LCD driving",
         "Integrated MQTT with TLS over HiveMQ Cloud for reliable remote command delivery",
-        "Built Next.js + Tailwind web dashboard with preset message slots and LED pattern selector, deployed to Vercel",
-        "3D-printed a flower pot enclosure sized to house both PCBs, the LCD, and internal wiring cleanly",
-        "Validated full pipeline: face in frame → UART trigger → LED animation + LCD message update",
+        "Built the Next.js + Tailwind web dashboard with preset message slots and a LED pattern selector, deployed to Vercel",
+        "3D-printed the flower pot enclosure and validated the full pipeline: face in frame → UART trigger → LED animation + LCD message update",
       ],
-      results: "Fully functional gift — face detection reliably triggers LED animation and personalized messages. Remote web dashboard operational for uploading new messages and live camera monitoring.",
+      issues: [
+        {
+          issue: "[Add a specific issue you ran into here]",
+          fix: "[And how you diagnosed and fixed it]",
+        },
+      ],
     },
   },
 ];
@@ -452,7 +548,14 @@ export const testimonialsData: {
   comment: string;
   date: string;
 }[] = [
-  // Add approved submissions here
+  {
+    id: 1,
+    name: "Peter Bohlen",
+    relationship: "Teammate",
+    rating: 5,
+    comment: "Extremely proactive in seeking out action items to assist the electronics, battery and powertrain teams of Bearcats Electric Racing. A self stater who seeks out connections with other engineers who can offer a new perspective. Extremely diligent in his areas of interest",
+    date: "2026-06",
+  },
 ];
 
 export const navLinks = [

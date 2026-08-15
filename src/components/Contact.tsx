@@ -13,12 +13,6 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-20 relative" ref={ref}>
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyber-yellow/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyber-orange/5 rounded-full blur-3xl" />
-      </div>
-
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -27,7 +21,7 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-cyber-yellow text-sm uppercase tracking-widest">
+          <span className="font-mono text-cyber-yellow text-sm tracking-widest">
             // Get In Touch
           </span>
           <h2 className="section-heading mt-4">
@@ -84,7 +78,7 @@ export default function Contact() {
                   <item.icon size={20} />
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs font-mono uppercase tracking-wider">
+                  <p className="text-gray-500 text-xs font-mono tracking-wider">
                     {item.label}
                   </p>
                   {item.href ? (
@@ -104,7 +98,7 @@ export default function Contact() {
 
           {/* Social Links */}
           <div className="text-center">
-            <h3 className="text-cyber-yellow font-mono text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-cyber-yellow font-mono text-sm tracking-wider mb-4">
               Connect
             </h3>
             <div className="flex justify-center gap-4">
